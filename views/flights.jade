@@ -1,0 +1,10 @@
+extends layout
+
+block content
+   h1= title
+
+   each leg in flightlegs
+      section.box
+         each segment in leg.segments
+            p departs: #{segment.departureAirportLocation} - #{segment.departureTime}
+            p arrives: #{segment.arrivalAirportLocation} - #{segment.arrivalTime}
