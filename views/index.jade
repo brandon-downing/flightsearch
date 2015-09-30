@@ -2,4 +2,27 @@ extends layout
 
 block content
   h1= title
-  a(href='/flights?departureDate=2015-10-10&departureAirport=ORD&arrivalAirport=LAX') Go
+  form(action="/flights") 
+    input#datepicker(
+       name="departureDate"
+       type="text"
+       placeholder="Select date"
+    )
+    div
+       label From
+       select(name="departureAirport")
+          option ORD
+          option LAX
+          option ORL
+
+    div
+       label To
+       select(name="arrivalAirport")
+          option LAX
+          option ORD
+          option ORL
+     input(
+        type="submit"
+        value="Search"
+     )
+  script $("#datepicker").datepicker({dateFormat: 'yy-mm-dd'});  
