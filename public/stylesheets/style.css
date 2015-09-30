@@ -31,3 +31,5 @@ input[type="submit"] {
     border-radius: 0.3em;
     background: rgb(227, 227, 239);
 }
+label {display: inline-block; min-width: 3em}
+p > span { margin-right: 3em; min-width: 30em; display: inline-block;}

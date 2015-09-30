@@ -2,7 +2,8 @@ extends layout
 
 block content
   h1= title
-  form(action="/flights") 
+  form(action="/flights")
+    label On 
     input#datepicker(
        name="departureDate"
        type="text"
@@ -11,16 +12,116 @@ block content
     div
        label From
        select(name="departureAirport")
-          option ORD
-          option LAX
-          option ORL
+          option(value="") Select departure airport
+          option(value="ATL") Atlanta
+          option(value="ANC") Anchorage
+          option(value="AUS") Austin
+          option(value="BWI") Baltimore
+          option(value="BOS") Boston
+          option(value="CLT") Charlotte
+          option(value="MDW") Chicago Midway
+          option(value="ORD") Chicago O'Hare
+          option(value="CVG") Cincinnati
+          option(value="CLE") Cleveland
+          option(value="CMH") Columbus
+          option(value="DFW") Dallas
+          option(value="DEN") Denver
+          option(value="DTW") Detroit
+          option(value="FLL") Fort Lauderdale
+          option(value="RSW") Fort Myers
+          option(value="BDL") Hartford
+          option(value="HNL") Honolulu
+          option(value="IAH") Houston: George Bush
+          option(value="HOU") Houston:	William P. Hobby
+          option(value="IND") Indianapolis
+          option(value="MCI") Kansas City
+          option(value="LAS") Las Vegas
+          option(value="LAX") Los Angeles
+          option(value="MEM") Memphis
+          option(value="MIA") Miami
+          option(value="MSP") Minneapolis
+          option(value="BNA") Nashville
+          option(value="MSY") New Orleans
+          option(value="JFK") New York JFK
+          option(value="LGA") New York: LaGuardia
+          option(value="EWR") Newark
+          option(value="OAK") Oakland
+          option(value="ONT") Ontario
+          option(value="MCO") Orlando
+          option(value="PHL") Philadelphia
+          option(value="PHX") Phoenix
+          option(value="PIT") Pittsburgh
+          option(value="PDX") Portland	
+          option(value="RDU") Raleigh-Durham
+          option(value="SMF") Sacramento
+          option(value="SLC") Salt Lake City
+          option(value="SAT") San Antonio
+          option(value="SAN") San Diego
+          option(value="SFO") San Francisco
+          option(value="SJC") San Jose
+          option(value="SNA") Santa Ana
+          option(value="SEA") Seattle
+          option(value="STL") St. Louis	
+          option(value="TPA") Tampa	
+          option(value="IAD") Washington D.C.: Dulles
+          option(value="DCA") Washington D.C.: Ronald Reagan          
 
     div
        label To
        select(name="arrivalAirport")
-          option LAX
-          option ORD
-          option ORL
+          option(value="") Select destination
+          option(value="ATL") Atlanta
+          option(value="ANC") Anchorage
+          option(value="AUS") Austin
+          option(value="BWI") Baltimore
+          option(value="BOS") Boston
+          option(value="CLT") Charlotte
+          option(value="MDW") Chicago Midway
+          option(value="ORD") Chicago O'Hare
+          option(value="CVG") Cincinnati
+          option(value="CLE") Cleveland
+          option(value="CMH") Columbus
+          option(value="DFW") Dallas
+          option(value="DEN") Denver
+          option(value="DTW") Detroit
+          option(value="FLL") Fort Lauderdale
+          option(value="RSW") Fort Myers
+          option(value="BDL") Hartford
+          option(value="HNL") Honolulu
+          option(value="IAH") Houston: George Bush
+          option(value="HOU") Houston:	William P. Hobby
+          option(value="IND") Indianapolis
+          option(value="MCI") Kansas City
+          option(value="LAS") Las Vegas
+          option(value="LAX") Los Angeles
+          option(value="MEM") Memphis
+          option(value="MIA") Miami
+          option(value="MSP") Minneapolis
+          option(value="BNA") Nashville
+          option(value="MSY") New Orleans
+          option(value="JFK") New York JFK
+          option(value="LGA") New York: LaGuardia
+          option(value="EWR") Newark
+          option(value="OAK") Oakland
+          option(value="ONT") Ontario
+          option(value="MCO") Orlando
+          option(value="PHL") Philadelphia
+          option(value="PHX") Phoenix
+          option(value="PIT") Pittsburgh
+          option(value="PDX") Portland	
+          option(value="RDU") Raleigh-Durham
+          option(value="SMF") Sacramento
+          option(value="SLC") Salt Lake City
+          option(value="SAT") San Antonio
+          option(value="SAN") San Diego
+          option(value="SFO") San Francisco
+          option(value="SJC") San Jose
+          option(value="SNA") Santa Ana
+          option(value="SEA") Seattle
+          option(value="STL") St. Louis	
+          option(value="TPA") Tampa	
+          option(value="IAD") Washington D.C.: Dulles
+          option(value="DCA") Washington D.C.: Ronald Reagan
      input(
         type="submit"
         value="Search"
