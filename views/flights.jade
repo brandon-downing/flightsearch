@@ -2,14 +2,20 @@ extends layout
 
 block content
    h1= title
-
+   h2 For #{departureDate}, from #{departureAirport} to #{arrivalAirport}
    each leg in flightlegs
       section.box
-         each segment in leg.segments
-            p
-               span From: 
-                  strong #{segment.departureAirportLocation} 
-                  span - #{segment.departureTime}
-               span To: 
-                  strong #{segment.arrivalAirportLocation} 
-                  span - #{segment.arrivalTime}
+         div.flight-legs
+            each segment in leg.segments
+               p 
+                  span 
+                     strong #{segment.departureAirportLocation.replace(/, USA/g, '')} 
+                     span (#{new Date(segment.departureTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'})}) &ndash; &nbsp;
+                  span 
+                     strong #{segment.arrivalAirportLocation.replace(/, USA/g, '')} 
+                     span ( #{new Date(segment.arrivalTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'})} )
+
+         each offer in flightoffers
+            each offerLegId in offer.legIds
+               if offerLegId === leg.legId
+                  div.price #{offer.totalFarePrice.formattedWholePrice}

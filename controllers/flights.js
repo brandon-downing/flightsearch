@@ -16,13 +16,15 @@ module.exports.flights = function(req, res){
 
 
 request(flightApiOptions, function(err, response, body){
+    console.log(flightApiOptions.url);
     if(err){
         console.log(err);
     } else if (response.statusCode === 200) {
     		var responseBody = JSON.parse(body);
-    		console.log(responseBody.legs);
-    		res.render('flights', { title: 'Flights Results', flightlegs: responseBody.legs, flightoffers: responseBody.offers });
-    		//res.render('leagues', { title: 'European Football Leagues', leaguedata: leagues, season: season });
+    		
+    		res.render('flights', { title: 'Flight Results', flightlegs: responseBody.legs, flightoffers: responseBody.offers, 
+                departureDate: departureDate, departureAirport: departureAirport, arrivalAirport: arrivalAirport });
+    		
     } else {
         console.log(response.statusCode);
     }
