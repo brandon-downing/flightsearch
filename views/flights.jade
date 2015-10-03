@@ -7,13 +7,14 @@ block content
       section.box
          div.flight-legs
             each segment in leg.segments
-               p 
-                  span 
+                
+                  span.airline #{segment.airlineName}
+                  p.flight-leg 
                      strong #{segment.departureAirportLocation.replace(/, USA/g, '')} 
-                     span (#{new Date(segment.departureTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'})}) &ndash; &nbsp;
-                  span 
+                     span.time (#{new Date(segment.departureTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'})}) &ndash; &nbsp;
+                   
                      strong #{segment.arrivalAirportLocation.replace(/, USA/g, '')} 
-                     span ( #{new Date(segment.arrivalTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'})} )
+                     span.time (#{new Date(segment.arrivalTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'})})
 
          each offer in flightoffers
             each offerLegId in offer.legIds
