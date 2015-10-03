@@ -2,7 +2,7 @@ extends layout
 
 block content
    h1= title
-   h2 For #{departureDate}, from #{departureAirport} to #{arrivalAirport}
+   h2 For #{new Date(departureDate).toLocaleDateString()}, from #{flightlegs[0].segments[0].departureAirportLocation.replace(/, USA/,'')} to #{flightlegs[0].segments[0].arrivalAirportLocation.replace(/, USA/,'')}
    each leg in flightlegs
       section.box
          div.flight-legs
