@@ -2,21 +2,21 @@ extends layout
 
 block content
    h1= title
-   h2 For #{new Date(departureDate).toLocaleDateString()}, from #{flightlegs[0].segments[0].departureAirportLocation.replace(/, USA/,'')} to #{flightlegs[0].segments[flightlegs[0].segments.length-1].arrivalAirportLocation.replace(/, USA/,'')}
-   each leg in flightlegs
-      section.box
-         div.flight-legs
-            each segment in leg.segments
-                
-                  span.airline #{segment.airlineName}
-                  p.flight-leg 
-                     strong #{segment.departureAirportLocation.replace(/, USA/g, '')} 
-                     span.time (#{new Date(segment.departureTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'})}) &ndash; &nbsp;
-                   
-                     strong #{segment.arrivalAirportLocation.replace(/, USA/g, '')} 
-                     span.time (#{new Date(segment.arrivalTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'})})
+   // h2 For #{new Date(departureDate).toLocaleDateString()}, from #{flightlegs[0].segments[0].departureAirportLocation.replace(/, USA/,'')} to #{flightlegs[0].segments[flightlegs[0].segments.length-1].arrivalAirportLocation.replace(/, USA/,'')}
+   
 
-         each offer in flightoffers
-            each offerLegId in offer.legIds
-               if offerLegId === leg.legId
-                  div.price #{offer.totalFarePrice.formattedWholePrice}
+
+   each offer in flightoffers
+      each offerLegId in offer.legIds
+         each leg in flightlegs 
+           if leg.legId === offerLegId
+              section.box
+                 div.price #{offer.totalFarePrice.formattedWholePrice}
+                 div.flight-legs
+                 each segment in leg.segments
+                    span.airline #{segment.airlineName}
+                    p.flight-leg
+                       strong #{segment.departureAirportLocation.replace(/, USA/g, '')}
+                       span.time (#{new Date(segment.departureTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'})}) &ndash; &nbsp;
+                       strong #{segment.arrivalAirportLocation.replace(/, USA/g, '')}
+                       span.time (#{new Date(segment.arrivalTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'})})

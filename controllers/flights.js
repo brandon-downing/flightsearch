@@ -20,27 +20,19 @@ request(flightApiOptions, function(err, response, body){
     if(err){
         console.log(err);
     } else if (response.statusCode === 200) {
-    		var responseBody = JSON.parse(body);
-            var flightOffers = [], 
-                flightOffersSort = function(){
+    		var responseBody = JSON.parse(body), 
+                flightOffers = []; 
+                (function(){
                     responseBody.offers.forEach(function(item, index, array){
                         var newItem = parseInt(item.baseFare);
-                        item.baseFareNum = newItem;
-                        console.log(newItem);
-                        
+                            item.baseFareNum = newItem;
                             flightOffers.push(item);
-                     
                     });
-                };
-                flightOffersSort();
-
+                }());
+                
                 var flightOffersSorted = flightOffers.sort(function(a,b){
                     return a.baseFareNum - b.baseFareNum;
                 });
-
-                //console.log(flightOffersSorted);
-
-                //console.log(flightOffers);
     		
     		res.render('flights', { title: 'Flight Results', flightlegs: responseBody.legs, flightoffers: flightOffersSorted, 
                 departureDate: departureDate, departureAirport: departureAirport, arrivalAirport: arrivalAirport });
