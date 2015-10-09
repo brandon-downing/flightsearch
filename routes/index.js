@@ -6,5 +6,6 @@ var express = require('express'),
 /* GET home page. */
 router.get('/', ctrl.home);
 router.get('/flights', ctrl.flights);
+router.get('/flight-detail', ctrl.flightDetail);
 
 module.exports = router;

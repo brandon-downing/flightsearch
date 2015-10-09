@@ -1,0 +1,17 @@
+extends layout
+
+block content
+   h1= title
+   
+   main 
+      p #{flightDetail.offer.legIds}
+      p Price: #{flightDetail.offer.totalFarePrice.formattedWholePrice}
+      
+      each leg in flightDetail.legs
+         each segment in leg.segments
+            p Carrier: #{segment.airlineName}
+            p Times: #{segment.departureTime} - #{segment.arrivalTime}
+            p Duration: #{segment.duration}
+            p Equipment: #{segment.equipmentDescription}  
+            p Total distance: #{segment.distance} #{segment.distanceUnits}
+           
