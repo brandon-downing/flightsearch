@@ -12,6 +12,7 @@ block content
             p Carrier: #{segment.airlineName}
             p Times: #{segment.departureTime} - #{segment.arrivalTime}
             p Duration: #{segment.duration}
+            p Class: #{offer.segmentAttributes[0].cabinCode}
             p Equipment: #{segment.equipmentDescription}  
             p Total distance: #{segment.distance} #{segment.distanceUnits}
            
