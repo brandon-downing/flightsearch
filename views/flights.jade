@@ -12,7 +12,7 @@ block content
            if leg.legId === offerLegId
               section.box
                  div.price #{offer.totalFarePrice.formattedWholePrice}
-                 a(href='flight-detail')
+                 a(href='flight-detail?departureDate='+departureDate+'&departureAirport='+departureAirport+'&arrivalAirport='+arrivalAirport+'&productKey='+offer.productKey)
                     button.select-flight  select
                  div.flight-legs
                  each segment in leg.segments

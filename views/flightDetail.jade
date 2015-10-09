@@ -2,3 +2,12 @@ extends layout
 
 block content
    h1= title
+   
+   main 
+      p #{flightDetail.offer.legIds}
+      p #{flightDetail.offer.totalFarePrice.formattedWholePrice}
+      
+      each leg in flightDetail.legs
+         each segment in leg.segments
+            p #{segment.departureTime}
+            p #{segment.arrivalTime}
