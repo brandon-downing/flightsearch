@@ -12,6 +12,8 @@ block content
            if leg.legId === offerLegId
               section.box
                  div.price #{offer.totalFarePrice.formattedWholePrice}
+                 a(href='flight-detail')
+                    button.select-flight  select
                  div.flight-legs
                  each segment in leg.segments
                     span.airline #{segment.airlineName}

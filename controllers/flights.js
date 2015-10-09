@@ -24,14 +24,14 @@ request(flightApiOptions, function(err, response, body){
                 flightOffers = []; 
                 (function(){
                     responseBody.offers.forEach(function(item, index, array){
-                        var newItem = parseInt(item.baseFare);
-                            item.baseFareNum = newItem;
+                        var newItem = parseInt(item.totalFare);
+                            item.totalFareNum = newItem;
                             flightOffers.push(item);
                     });
                 }());
                 
                 var flightOffersSorted = flightOffers.sort(function(a,b){
-                    return a.baseFareNum - b.baseFareNum;
+                    return a.totalFareNum - b.totalFareNum;
                 });
     		
     		res.render('flights', { title: 'Flight Results', flightlegs: responseBody.legs, flightoffers: flightOffersSorted, 
@@ -43,3 +43,8 @@ request(flightApiOptions, function(err, response, body){
 });
 	
 };
+
+
+module.exports.flightDetail = function(req, res){
+    res.render('flightDetail', {title: 'Flight Detail'});
+}
