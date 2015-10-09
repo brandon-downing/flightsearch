@@ -5,9 +5,13 @@ block content
    
    main 
       p #{flightDetail.offer.legIds}
-      p #{flightDetail.offer.totalFarePrice.formattedWholePrice}
+      p Price: #{flightDetail.offer.totalFarePrice.formattedWholePrice}
       
       each leg in flightDetail.legs
          each segment in leg.segments
-            p #{segment.departureTime}
-            p #{segment.arrivalTime}
+            p Carrier: #{segment.airlineName}
+            p Times: #{segment.departureTime} - #{segment.arrivalTime}
+            p Duration: #{segment.duration}
+            p Equipment: #{segment.equipmentDescription}  
+            p Total distance: #{segment.distance} #{segment.distanceUnits}
+           
