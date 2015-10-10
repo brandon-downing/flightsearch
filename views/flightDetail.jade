@@ -4,14 +4,29 @@ block content
    h1= title
    
    main 
-      p #{flightDetail.offer.legIds}
-      p Price: #{flightDetail.offer.totalFarePrice.formattedWholePrice}
+      // p #{flightDetail.offer.legIds}
+      section.box
+         h2 Price
+         p Base price: #{flightDetail.offer.baseFarePrice.formattedWholePrice}
+         p Taxes: #{flightDetail.offer.taxesPrice.formattedWholePrice}
+         p Total price: #{flightDetail.offer.totalFarePrice.formattedWholePrice}
       
       each leg in flightDetail.legs
          each segment in leg.segments
-            p Carrier: #{segment.airlineName}
-            p Times: #{segment.departureTime} - #{segment.arrivalTime}
-            p Duration: #{segment.duration}
-            p Equipment: #{segment.equipmentDescription}  
-            p Total distance: #{segment.distance} #{segment.distanceUnits}
+            section.box
+               h2 Trip details
+               p Trip date: #{new Date(segment.departureTimeRaw).toLocaleDateString()}
+               p Depart: #{new Date(segment.departureTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'})}
+               p Arrive: #{new Date(segment.arrivalTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'})}
+               p Duration: #{segment.duration}
+               p Total distance: #{segment.distance} #{segment.distanceUnits}
+
+            section.box
+               h2 Carrier
+               p Airline: #{segment.airlineName}
+               p Equipment: #{segment.equipmentDescription}  
+               p Class: #{flightDetail.offer.segmentAttributes[0][0]['cabinCode']}
+            
+
+            p Free cancellation before: #{leg.freeCancellationBy.localized}
            
