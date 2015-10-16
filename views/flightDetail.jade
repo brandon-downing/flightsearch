@@ -2,9 +2,8 @@ extends layout
 
 block content
    h1= title
-   
-   main 
-      // p #{flightDetail.offer.legIds}
+   main
+      h2#origin-destination
       section.box
          h2 Price
          p Base price: #{flightDetail.offer.baseFarePrice.formattedWholePrice}
@@ -15,10 +14,14 @@ block content
          each segment in leg.segments
             section.box
                h2 Trip details
+               p from 
+                  strong #{segment.departureAirportLocation} 
+                  span to&nbsp; 
+                  strong #{segment.arrivalAirportLocation}
                p Trip date: #{new Date(segment.departureTimeRaw).toLocaleDateString()}
                p Depart: #{new Date(segment.departureTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'})}
                p Arrive: #{new Date(segment.arrivalTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'})}
-               p Duration: #{segment.duration}
+               p Duration: #{segment.duration.substr(2).replace(/H/,'h ').replace(/M/,'m')}
                p Total distance: #{segment.distance} #{segment.distanceUnits}
 
             section.box
@@ -27,6 +30,6 @@ block content
                p Equipment: #{segment.equipmentDescription}  
                p Class: #{flightDetail.offer.segmentAttributes[0][0]['cabinCode']}
             
-
+         if leg.freeCancellationBy
             p Free cancellation before: #{leg.freeCancellationBy.localized}
-           
+         script var arrivalAirport = '#{arrivalAirport}', departureAirport = '#{departureAirport}';//FS.populateOrigDest();
