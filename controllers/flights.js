@@ -61,10 +61,10 @@ module.exports.flightDetail = function(req, res){
             console.log(err);
         } else if (response.statusCode === 200) {
                 var responseBody = JSON.parse(body);
-                   console.log(responseBody);
+                   //console.log(responseBody);
                    
                     
-                res.render('flightDetail', {title: 'Flight Detail', flightDetail: responseBody});
+                res.render('flightDetail', {title: 'Flight Detail', flightDetail: responseBody, departureAirport: departureAirport, arrivalAirport: arrivalAirport});
                 
         } else {
             console.log(response.statusCode);
