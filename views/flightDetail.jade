@@ -2,8 +2,9 @@ extends layout
 
 block content
    h1= title
+      span :&nbsp;
+      span#origin-destination
    main
-      h2#origin-destination
       section.box
          h2 Price
          p Base price: #{flightDetail.offer.baseFarePrice.formattedWholePrice}
