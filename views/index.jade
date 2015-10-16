@@ -1,27 +1,29 @@
 extends layout
 
 block content
-  h1= title
-  form(action="/flights")
-    label On 
-    input#datepicker(
-       name="departureDate"
-       type="text"
-       placeholder="Select date"
-    )
-    div
-       label From
-       select(name="departureAirport" id="departureAirport")
-          option(value="") Select departure airport
-   
-
-    div
-       label To
-       select(name="arrivalAirport" id="arrivalAirport")
-          option(value="") Select destination
-          
-     input(
-        type="submit"
-        value="Search"
-     )
-  script $("#datepicker").datepicker({dateFormat: 'yy-mm-dd', minDate: new Date()});  
+  main.box
+  
+    h1= title
+    form(action="/flights")
+      label On 
+      input#datepicker(
+        name="departureDate"
+        type="text"
+        placeholder="Select date"
+      )
+      div
+        label From
+        select(name="departureAirport" id="departureAirport")
+            option(value="") Select departure airport
+    
+  
+      div
+        label To
+        select(name="arrivalAirport" id="arrivalAirport")
+            option(value="") Select destination
+            
+      input(
+          type="submit"
+          value="Search"
+      )
+    script $("#datepicker").datepicker({dateFormat: 'yy-mm-dd', minDate: new Date()});  
