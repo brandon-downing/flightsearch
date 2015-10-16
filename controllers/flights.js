@@ -33,7 +33,6 @@ request(flightApiOptions, function(err, response, body){
                 var flightOffersSorted = flightOffers.sort(function(a,b){
                     return a.totalFareNum - b.totalFareNum;
                 });
-    		
     		res.render('flights', { title: 'Flight Results', flightlegs: responseBody.legs, flightoffers: flightOffersSorted, 
                 departureDate: departureDate, departureAirport: departureAirport, arrivalAirport: arrivalAirport });
     		
@@ -63,8 +62,10 @@ module.exports.flightDetail = function(req, res){
                 var responseBody = JSON.parse(body);
                    //console.log(responseBody);
                    
-                    
-                res.render('flightDetail', {title: 'Flight Detail', flightDetail: responseBody, departureAirport: departureAirport, arrivalAirport: arrivalAirport});
+                formattedDD = new Date(departureDate).toUTCString();
+                formattedDD = formattedDD.substr(0, formattedDD.length - 13);    
+                res.render('flightDetail', {title: 'Flight Detail', flightDetail: responseBody, departureAirport: departureAirport, 
+                    arrivalAirport: arrivalAirport, departureDate: formattedDD});
                 
         } else {
             console.log(response.statusCode);
