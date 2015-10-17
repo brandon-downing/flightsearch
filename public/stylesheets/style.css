@@ -1,5 +1,5 @@
 body {
-  padding: 50px;
+  padding: 1em;
   font: 16px normal Helvetica, Arial, sans-serif;
 }
 
@@ -13,7 +13,7 @@ a {
     margin-bottom: 0.2em;
     border-radius: 0.5em;
 }
-main.box {width: 60%; margin: auto; max-width: 40em; min-width:25em; padding: 1em; margin-bottom: .5em; background: #ECF9F0;}
+main.box {width: 60%; font-size: 85%; margin: auto; max-width: 40em; min-width: 21em; padding: 1em; margin-bottom: .5em; background: #ECF9F0;}
 section.box {width: 90%; max-width: 40em; padding: 1em; margin-bottom: .5em; background: #ECF9F0;} 
 select {
     font-size: 1rem;
@@ -32,7 +32,7 @@ input[type="submit"] {
 }
 label {display: inline-block; min-width: 3em}
 p > span { /*margin-right: 3em; min-width: 30em;*/ display: inline-block;}
-section.box {position: relative;}
+section.box {position: relative; min-height: 6em;}
 section.leg {border-bottom: 1px solid #666;}
 .price {
     font-size: 120%;
