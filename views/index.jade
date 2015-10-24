@@ -4,20 +4,21 @@ block content
   main.box
   
     h1= title
-    form(action="/flights")
-      label On 
-      input#datepicker(
-        name="departureDate"
-        type="text"
-        placeholder="Select date"
-      )
-      div
+    form#flight-search(action="/flights")
+      div#date-container
+         label On 
+         input#datepicker(
+           name="departureDate"
+           type="text"
+           placeholder="Select date"
+         )
+      div#origin-container
         label From
         select(name="departureAirport" id="departureAirport")
             option(value="") Select departure airport
     
   
-      div
+      div#dest-container
         label To
         select(name="arrivalAirport" id="arrivalAirport")
             option(value="") Select destination

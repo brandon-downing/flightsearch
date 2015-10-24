@@ -21,4 +21,20 @@ $(function(){
 	//functions to run on DOM ready
 	FS.populateOrigDest();
 	FS.populateAirportDropdowns();
+	$('#flight-search').on('submit', function(){
+		$('.error').removeClass('error');
+		if ($('#datepicker').val().length < 10){
+			$('#date-container').addClass('error');
+			console.log('pick a date');
+			return false;
+		} else if ($('#departureAirport').val() === '') {
+			$('#origin-container').addClass('error');
+			console.log('pick origin');
+			return false;
+		}else if ($('#arrivalAirport').val() === '') {
+			$('#dest-container').addClass('error');
+			console.log('pick destination');
+			return false;
+		}
+	});
 });
