@@ -24,10 +24,8 @@ var FS = {
 					'&imageHeight=' +this.imageSize.height, 
 				dataType: 'json'
 			}).done(function(data){
-
-				 
-				 if($('#detailContainer').length > 0) {
-					$('#detailContainer').find('.imageContainer').css('background-image','url('+data.imageUrl+')');
+				 if($('.backgroundImage').length > 0) {
+					$('.backgroundImage').css('background-image','url('+data.imageUrl+')');
 				}
 			})
 			.fail(function(){
