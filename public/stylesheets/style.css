@@ -40,6 +40,8 @@ main.box {
 }
 
 section.box {width: 90%; max-width: 40em; padding: 1em; margin-bottom: .5em; background: #ECF9F0;} 
+section.box.search-form {min-height: 20em; margin-top: 10em}
+
 select {
     font-size: 1rem;
 }
@@ -103,7 +105,7 @@ div[id$='-container'].error::after { color: #9e1f1a;
     font-size: 2em;
     margin-left: 0.5em; }
     
- .backgroundImage {
+ .backgroundImage, .backgroundImage-home {
     position: fixed;
     top: 4em;
     left: 0;
@@ -114,3 +116,16 @@ div[id$='-container'].error::after { color: #9e1f1a;
     opacity: 0.5;
 }
 #detailContainer .box {background-color: rgba(236,249,240, 0.9)}
+
+.backgroundImage-home {
+ /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#a7cfdf+0,23538a+100;Blue+3d+%238 */
+background: #a7cfdf; /* Old browsers */
+background: -moz-radial-gradient(center, ellipse cover,  #a7cfdf 0%, #23538a 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#a7cfdf), color-stop(100%,#23538a)); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover,  #a7cfdf 0%,#23538a 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover,  #a7cfdf 0%,#23538a 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover,  #a7cfdf 0%,#23538a 100%); /* IE10+ */
+background: radial-gradient(ellipse at center,  #a7cfdf 0%,#23538a 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a7cfdf', endColorstr='#23538a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+
