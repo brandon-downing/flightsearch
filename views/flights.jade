@@ -1,6 +1,7 @@
 extends layout
 
 block content
+  div.backgroundImage
   main
    h1= title
    // h2 For #{new Date(departureDate).toLocaleDateString()}, from #{flightlegs[0].segments[0].departureAirportLocation.replace(/, USA/,'')} to #{flightlegs[0].segments[flightlegs[0].segments.length-1].arrivalAirportLocation.replace(/, USA/,'')}
@@ -22,4 +23,5 @@ block content
                        strong #{segment.departureAirportLocation.replace(/, USA/g, '')}
                        span.time (#{new Date(segment.departureTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'})}) &ndash; &nbsp;
                        strong #{segment.arrivalAirportLocation.replace(/, USA/g, '')}
-                       span.time (#{new Date(segment.arrivalTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'})})
+                       span.time (#{new Date(segment.arrivalTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'})}) 
+  script var arrivalAirport = '#{arrivalAirport}', departureAirport = '#{departureAirport}';
