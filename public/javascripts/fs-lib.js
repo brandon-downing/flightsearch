@@ -1,4 +1,6 @@
 var FS = {
+	imageSize: {width: 720, height: 1140},
+	
 	populateOrigDest: function(){
 		if (typeof departureAirport !== 'undefined' && typeof arrivalAirport !== 'undefined'){
 			$('#origin-destination').html(airportsCodesNames[departureAirport] +' - '+ airportsCodesNames[arrivalAirport]);
@@ -13,6 +15,25 @@ var FS = {
 			$('#arrivalAirport').append(option);
 
 		});
+	}, 
+	getImage: function () {
+		if (typeof arrivalAirport !== 'undefined') {
+			$.ajax({
+				url:'https://www.expedia.com:443/api/flight/image?destinationCode=' + arrivalAirport + 
+					'&imageWidth=' + this.imageSize.width +
+					'&imageHeight=' +this.imageSize.height, 
+				dataType: 'json'
+			}).done(function(data){
+
+				 
+				 if($('#detailContainer').length > 0) {
+					$('#detailContainer').find('.imageContainer').css('background-image','url('+data.imageUrl+')');
+				}
+			})
+			.fail(function(){
+				console.warn('error');
+			});
+		}
 	}
 };
 
@@ -37,4 +58,6 @@ $(function(){
 			return false;
 		}
 	});
+	FS.getImage();
+	
 });
