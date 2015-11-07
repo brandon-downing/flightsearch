@@ -39,10 +39,10 @@ main.box {
     background: #ECF9F0;    
 }
 
-section.box {width: 90%; max-width: 40em; padding: 1em; margin-bottom: .5em; background: #ECF9F0;} 
+section.box {width: 90%; max-width: 40em; padding: 1em; margin-bottom: .5em; background: rgba(211, 211, 211, 0.9)} 
 section.box.search-form {min-height: 20em; margin-top: 10em}
 
-select {
+.search-form select {
     font-size: 1rem;
 }
 select, input, button {
@@ -69,7 +69,16 @@ section.leg {border-bottom: 1px solid #666;}
     top: .3em;
     color: #9E1F1A;
 }
-.price-detail {text-align: right;}
+
+.price-detail {
+    text-align: right;
+    margin-left: 70%;
+    background-color: #fff;
+    padding: 0.5em;
+    border: solid 1px #666;
+}
+.price-detail p {margin: 0.5em 0;}
+
 .airline {display: inline-block;
     font-size: 66%;
     border-radius: 0.5em;
@@ -93,7 +102,7 @@ section.leg {border-bottom: 1px solid #666;}
 }
 .select-flight:hover {background-color: #DE1818; border-width: 2px; cursor: pointer;}
 div[id$='-container'] {
-    width:50%;
+    width:62%;
     display: inline-block;
     padding: 0 1em;
     border: 1px solid transparent;
@@ -115,7 +124,6 @@ div[id$='-container'].error::after { color: #9e1f1a;
     background-size: cover;
     opacity: 0.5;
 }
-#detailContainer .box {background-color: rgba(236,249,240, 0.9)}
 
 .backgroundImage-home {
  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#a7cfdf+0,23538a+100;Blue+3d+%238 */
