@@ -36,7 +36,7 @@ request(flightApiOptions, function(err, response, body){
                     return a.totalFareNum - b.totalFareNum;
                 });
     		res.render('flights', { title: 'Flight Results', flightlegs: responseBody.legs, flightoffers: flightOffersSorted, 
-                departureDate: formattedDD, departureAirport: departureAirport, arrivalAirport: arrivalAirport });
+                departureDate: departureDate, formattedDepartureDate: formattedDD, departureAirport: departureAirport, arrivalAirport: arrivalAirport });
     		
     } else {
         console.log(response.statusCode);
