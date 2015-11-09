@@ -39,11 +39,12 @@ main.box {
     background: #ECF9F0;    
 }
 
-section.box {width: 90%; max-width: 40em; padding: 1em; margin-bottom: .5em; background: rgba(211, 211, 211, 0.9)} 
+section.box {width: 90%; max-width: 40em; min-width: 21em; padding: 1em; margin-bottom: .5em; background: rgba(211, 211, 211, 0.9)} 
 section.box.search-form {min-height: 20em; margin-top: 10em}
 
 .search-form select {
     font-size: 1rem;
+    max-width: 12em; 
 }
 select, input, button {
     font-size: 110%;
@@ -72,7 +73,8 @@ section.leg {border-bottom: 1px solid #666;}
 
 .price-detail {
     text-align: right;
-    margin-left: 70%;
+    margin-left: 65%;
+    min-width: 6em;
     background-color: #fff;
     padding: 0.5em;
     border: solid 1px #666;
@@ -102,7 +104,7 @@ section.leg {border-bottom: 1px solid #666;}
 }
 .select-flight:hover {background-color: #DE1818; border-width: 2px; cursor: pointer;}
 div[id$='-container'] {
-    width:62%;
+    min-width:18em;
     display: inline-block;
     padding: 0 1em;
     border: 1px solid transparent;
