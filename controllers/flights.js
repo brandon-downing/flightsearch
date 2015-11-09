@@ -1,7 +1,7 @@
 var request = require('request');
 
 module.exports.home = function(req, res){
-	res.render('index', { title: 'Search Flights' });
+	res.render('index', { title: 'Search Flights', noNav: true});
 };
 
 module.exports.flights = function(req, res){
@@ -21,7 +21,9 @@ request(flightApiOptions, function(err, response, body){
         console.log(err);
     } else if (response.statusCode === 200) {
     		var responseBody = JSON.parse(body), 
-                flightOffers = []; 
+                flightOffers = [], 
+                formattedDD = new Date(departureDate).toUTCString();
+                formattedDD = formattedDD.substr(0, formattedDD.length - 13);  
                 (function(){
                     responseBody.offers.forEach(function(item, index, array){
                         var newItem = parseInt(item.totalFare);
@@ -34,7 +36,7 @@ request(flightApiOptions, function(err, response, body){
                     return a.totalFareNum - b.totalFareNum;
                 });
     		res.render('flights', { title: 'Flight Results', flightlegs: responseBody.legs, flightoffers: flightOffersSorted, 
-                departureDate: departureDate, departureAirport: departureAirport, arrivalAirport: arrivalAirport });
+                departureDate: formattedDD, departureAirport: departureAirport, arrivalAirport: arrivalAirport });
     		
     } else {
         console.log(response.statusCode);
@@ -59,9 +61,7 @@ module.exports.flightDetail = function(req, res){
         if(err){
             console.log(err);
         } else if (response.statusCode === 200) {
-                var responseBody = JSON.parse(body);
-                   //console.log(responseBody);
-                   
+                var responseBody = JSON.parse(body),
                 formattedDD = new Date(departureDate).toUTCString();
                 formattedDD = formattedDD.substr(0, formattedDD.length - 13);    
                 res.render('flightDetail', {title: 'Flight Detail', flightDetail: responseBody, departureAirport: departureAirport, 
