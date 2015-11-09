@@ -13,6 +13,7 @@ html
     header
        nav
           menu
-             a.navlink(href='/') Home
+             if !noNav
+                a.navlink(href='/') Home
     block content
     footer

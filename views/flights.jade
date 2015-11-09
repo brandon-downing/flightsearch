@@ -4,6 +4,9 @@ block content
   div.backgroundImage
   main
    h1= title
+    span :&nbsp;
+    span#origin-destination
+   p #{departureDate}
    // h2 For #{new Date(departureDate).toLocaleDateString()}, from #{flightlegs[0].segments[0].departureAirportLocation.replace(/, USA/,'')} to #{flightlegs[0].segments[flightlegs[0].segments.length-1].arrivalAirportLocation.replace(/, USA/,'')}
    
 
