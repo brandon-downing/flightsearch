@@ -4,6 +4,10 @@ module.exports.home = function(req, res){
 	res.render('index', { title: 'Search Flights', noNav: true});
 };
 
+module.exports.search = function(req, res){
+	res.render('search', { title: 'Search Flights', noNav: true});
+};
+
 module.exports.flights = function(req, res){
 	var departureDate = req.query.departureDate, 
 		departureAirport = req.query.departureAirport, 
@@ -43,6 +47,13 @@ request(flightApiOptions, function(err, response, body){
     }
 });
 	
+};
+
+module.exports.results = function (req, res) {
+    var departureDate = req.query.departureDate, 
+		departureAirport = req.query.departureAirport, 
+		arrivalAirport = req.query.arrivalAirport;
+    res.render('results', {title: 'Flights', departureDate: departureDate, departureAirport: departureAirport, arrivalAirport: arrivalAirport});
 };
 
 
