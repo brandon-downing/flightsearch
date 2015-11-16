@@ -9,12 +9,23 @@ var flightCard = React.createClass({
 	_displayFlightResults: function () {
 		var self = this;
 		return (self.state.data.legs.map(function (flight, flightid) {
+			var currLegId = flight.legId, 
+			currentOffer;
+			self.state.data.offers.forEach(function(offer, index, array){
+				if ($.inArray(currLegId, offer.legIds) === 0) {
+					currentOffer = offer;
+					console.log(currentOffer);
+				}
+			});
+			
+			
 			return React.DOM.section({ key: flightid, 'data-flightid': flight.legId, className: 'box' },
-				flight.segments.map(function (seg, segid , segarray) {
-					console.log(seg);
+				flight.segments.map(function (seg, segid, segarray) {
+					//console.log(seg);
 					var departureTimeFormatted = new Date(seg.departureTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'}), 
 						arrivalTimeFormatted = new Date(seg.arrivalTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'});
 					return (<div>
+					           <div className="price">{currentOffer.totalFarePrice.formattedWholePrice}</div>
 								<span className="airline">{seg.airlineName}</span>
 								<p className="flight-leg">
 									<strong>{seg.departureAirportLocation.replace(/\,\ USA/g, '')}</strong>
