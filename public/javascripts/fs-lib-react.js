@@ -74,57 +74,47 @@ var flightDetail = React.createClass({
 	},
 	_displayDetail: function (){
 		var self = this, 
-			flightDetail = self.getInitialState().data;
-			console.log(flightDetail);
-		var _showPricing = function(){
-			return (<section className="price-detail">
-					<p>Total: <strong className="total">{flightDetail.offer.totalFarePrice.formattedWholePrice}</strong></p>
-					<p>Base: {flightDetail.offer.baseFarePrice.formattedWholePrice}</p><p>Taxes: {flightDetail.offer.taxesPrice.formattedWholePrice}</p>
-				</section>);
-		},
+			flightDetail = self.getInitialState().data, 
+		
+		
 		 _showFlightLegs = function () {
 			 //console.log(flightDetail.legs);
 			
 			return(flightDetail.legs.map(function(leg, legid){
 			
 				return(leg.segments.map(function(seg, segid){
+					var dptTime = new Date(seg.departureTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'}), 
+						arrTime = new Date(seg.arrivalTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'});
 					
 					return (<section className="leg">
-								<p><strong>{seg.departureAirportLocation.replace(/, USA/,'')}</strong><span>&ndash;&nbsp; </span><strong>Dallas</strong><span>&nbsp;(12/25/2015)</span></p>
-								<p>Spirit Airlines, Airbus A319, coach</p>
-								<p>Departs: 9:15 AM</p><p>Arrives: 11:48 AM</p>
-								<p>Duration: 2h 33m</p>
-								<p>Total distance: 799 miles</p>
+								<p><strong>{seg.departureAirportLocation.replace(/, USA/,'')}</strong><span>&ndash;&nbsp; </span>
+								<strong>{seg.arrivalAirportLocation.replace(/, USA/,'')}</strong><span>&nbsp;({new Date(seg.departureTimeRaw).toLocaleDateString()})</span></p>
+								<p>{seg.airlineName}, &nbsp;{seg.equipmentDescription}
+								</p>
+								<p>Departs: &nbsp;{dptTime}</p>
+								<p>Arrives: &nbsp;{arrTime}</p>
+								<p>Duration: &nbsp;{seg.duration.substr(2).replace(/H/,'h ').replace(/M/,'m')}</p>
+								<p>Total distance: &nbsp;{seg.distance} &nbsp;{seg.distanceUnits}</p>
 							</section>);
-				})
-				);
-				
-					
-							
-					
-				})
-				);
+				}));
+				}));
 		};
-		
-		return (
-			 _showPricing(),  _showFlightLegs()
 			
-				);
-				
-				
-				
-				
-				
-				/*
-				<section className="leg">
-					<p><strong>Dallas </strong><span>&ndash;&nbsp; </span><strong>New Orleans</strong><span>&nbsp;(12/25/2015)</span></p>
-					<p>Spirit Airlines, Airbus A319, coach</p><p>Departs: 12:28 PM</p><p>Arrives: 1:50 PM</p><p>Duration: 1h 22m</p><p>Total distance: 448 miles</p>
-				</section>*/
-				
-
+		return _showFlightLegs();
 	}, 
+	
+	_showPricing: function(){
+		var self = this, 
+			flightDetail = self.getInitialState().data;
+			return (<section className="price-detail">
+					<p>Total:&nbsp;<strong className="total">{flightDetail.offer.totalFarePrice.formattedWholePrice}</strong></p>
+					<p>Base:&nbsp;{flightDetail.offer.baseFarePrice.formattedWholePrice}</p>
+					<p>Taxes:&nbsp;{flightDetail.offer.taxesPrice.formattedWholePrice}</p>
+				</section>);
+		},
+		
 	render: function() {
-		return (React.DOM.div(null, this._displayDetail()));
+		return React.DOM.div(null, this._showPricing(), this._displayDetail());
 	}
 });
 
