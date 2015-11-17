@@ -1,29 +1,45 @@
 var flightCard = React.createClass({
 	displayName: 'FlightCard',
 	getInitialState: function () {
-		console.log(this.props.initialData);
+		//console.log(this.props.initialData);
 		return {
 			data: this.props.initialData
 		};
 	},
+
+	_sortOffers: function () {
+		var self = this,
+			_sortedOffers = [],
+			_sortedLegs = [];
+
+		self.state.data.offers.map(function (offer, offerid) {
+			offer.legIds.forEach(function (legid) {
+				self.state.data.legs.map(function (leg) {
+					if (legid === leg.legId) {
+						_sortedLegs.push(leg);
+						_sortedOffers.push(offer);
+					}
+
+				});
+			});
+		});
+		return ({ offers: _sortedOffers, legs: _sortedLegs });
+	},
+
 	_displayFlightResults: function () {
 		var self = this;
-		return (self.state.data.legs.map(function (flight, flightid) {
-			var currLegId = flight.legId, 
-			currentOffer;
-			self.state.data.offers.forEach(function(offer, index, array){
-				if ($.inArray(currLegId, offer.legIds) === 0) {
-					currentOffer = offer;
-					console.log(currentOffer);
-				}
-			});
-			
-			
+		var _sortedData = this._sortOffers();
+
+		return (_sortedData.legs.map(function (flight, flightid) {
+			var currentOffer = _sortedData.offers[flightid];
+
+
+
 			return React.DOM.section({ key: flightid, 'data-flightid': flight.legId, className: 'box' },
 				flight.segments.map(function (seg, segid, segarray) {
 					//console.log(seg);
-					var departureTimeFormatted = new Date(seg.departureTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'}), 
-						arrivalTimeFormatted = new Date(seg.arrivalTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'});
+					var departureTimeFormatted = new Date(seg.departureTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+						arrivalTimeFormatted = new Date(seg.arrivalTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
 					return (<div>
 					           <div className="price">{currentOffer.totalFarePrice.formattedWholePrice}</div>
 								<span className="airline">{seg.airlineName}</span>
@@ -34,8 +50,7 @@ var flightCard = React.createClass({
 									<strong>{seg.arrivalAirportLocation.replace(/\,\ USA/g, '')}</strong>
 									<span className="time">({arrivalTimeFormatted})</span>
 								</p>
-							</div>
-						);
+							</div>);
 				})
 				);
 		}));
