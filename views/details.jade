@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  div.backgroundImage
+  main
+   h1= title
+    span :&nbsp;
+    span#origin-destination
+   p #{formattedDepartureDate}
+   section#flightDetails
+
+   
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/react/0.14.2/react.min.js') 
+  script(src='https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.24/browser.min.js')
+  script var departureDate = '#{departureDate}', arrivalAirport = '#{arrivalAirport}', departureAirport = '#{departureAirport}' , productKey = '#{productKey}';
+  script(src='/javascripts/static-data.js')
+  script(src='/javascripts/fs-lib-react.js' type='text/babel')

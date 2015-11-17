@@ -8,6 +8,7 @@ router.get('/', ctrl.home);
 router.get('/flights', ctrl.flights);
 router.get('/search', ctrl.search);
 router.get('/results', ctrl.results);
+router.get('/details', ctrl.details);
 router.get('/flight-detail', ctrl.flightDetail);
 
 module.exports = router;
