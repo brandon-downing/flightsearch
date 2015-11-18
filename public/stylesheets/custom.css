@@ -18,7 +18,7 @@ footer {
     height: 2em;
 }
 
-p {line-height: 160%;}
+section, p {line-height: 160%; margin: 0.5em 0;}
 
 .box {
     box-shadow: 1px 1px 1px 1px;
@@ -90,6 +90,7 @@ section.leg {border-bottom: 1px solid #666;}
     padding: .2em;
     background-color: #bbb;
     color: #eee;
+    line-height: 140%;
     }
 .flight-leg {margin: 0;}
 .time {font-size: 80%; color: #666;}
@@ -141,3 +142,10 @@ background: radial-gradient(ellipse at center,  #a7cfdf 0%,#23538a 100%); /* W3C
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a7cfdf', endColorstr='#23538a',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 
+img.loader {
+    display: none;
+    position: absolute;
+    top: 40%;
+    left: 45%;
+}
+#flightDetails {display: none;}
