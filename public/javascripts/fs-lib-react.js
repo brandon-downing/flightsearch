@@ -81,27 +81,34 @@ var flightDetail = React.createClass({
 			 //console.log(flightDetail.legs);
 			
 			return(flightDetail.legs.map(function(leg, legid){
+				var cabinCode = flightDetail.offer.segmentAttributes[0][0]['cabinCode'];
 			
 				return(leg.segments.map(function(seg, segid){
 					var dptTime = new Date(seg.departureTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'}), 
-						arrTime = new Date(seg.arrivalTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'});
+						arrTime = new Date(seg.arrivalTime).toLocaleTimeString('en-US',{hour:'2-digit', minute:'2-digit'}), 
+						freeCancellation = leg.freeCancellationBy ? 'Free cancellation by: ' +leg.freeCancellationBy.localized : '';
 					
-					return (<section className="leg">
+					return (<div>
+							<section className="leg">
 								<p><strong>{seg.departureAirportLocation.replace(/, USA/,'')}</strong><span>&ndash;&nbsp; </span>
 								<strong>{seg.arrivalAirportLocation.replace(/, USA/,'')}</strong><span>&nbsp;({new Date(seg.departureTimeRaw).toLocaleDateString()})</span></p>
-								<p>{seg.airlineName}, &nbsp;{seg.equipmentDescription}
+								<p>{seg.airlineName}, &nbsp;{seg.equipmentDescription}, &nbsp; {cabinCode}
 								</p>
 								<p>Departs: &nbsp;{dptTime}</p>
 								<p>Arrives: &nbsp;{arrTime}</p>
 								<p>Duration: &nbsp;{seg.duration.substr(2).replace(/H/,'h ').replace(/M/,'m')}</p>
 								<p>Total distance: &nbsp;{seg.distance} &nbsp;{seg.distanceUnits}</p>
-							</section>);
+							</section>
+							<p>{freeCancellation}</p>
+							</div>
+							);
 				}));
+				
 				}));
 		};
 			
 		return _showFlightLegs();
-	}, 
+	},
 	
 	_showPricing: function(){
 		var self = this, 
@@ -159,6 +166,7 @@ if (hasParams) {
 					console.log('error');
 				});
 		}
+		$('menu a.navlink').attr('href', '/search');
 }
 
 	

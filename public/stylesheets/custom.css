@@ -18,6 +18,8 @@ footer {
     height: 2em;
 }
 
+p {line-height: 160%;}
+
 .box {
     box-shadow: 1px 1px 1px 1px;
     padding: 0.2em;
