@@ -133,6 +133,7 @@ if (isResults){
 	var hasParams = departureDate.length > 0 && departureAirport.length > 0 && arrivalAirport.length > 0,
 	url = "https://www.expedia.com:443/api/flight/search?departureDate=" + departureDate + "&departureAirport=" + departureAirport + "&arrivalAirport=" + arrivalAirport;
 if (hasParams) {
+	$('img.loader').show();
 	$.ajax({
 		url: url,
 		dataType: 'json'
@@ -142,9 +143,11 @@ if (hasParams) {
 				initialData: data
 			}),
 				document.getElementById('flightResults'));
+				$('img.loader').hide();
 		})
 		.fail(function () {
 			console.log('error');
+			$('img.loader').hide();
 		});
 	}
 } else if (isDetails) {
@@ -152,6 +155,7 @@ if (hasParams) {
     	url = 'https://www.expedia.com:443/api/flight/details?departureDate='+ departureDate +'&departureAirport='+ departureAirport +'&arrivalAirport='+ arrivalAirport +'&productKey='+ productKey;
 
 if (hasParams) {
+	$('img.loader').show();
 			$.ajax({
 				url: url,
 				dataType: 'json'
@@ -161,9 +165,12 @@ if (hasParams) {
 						initialData: data
 					}),
 						document.getElementById('flightDetails'));
+						$('img.loader').hide();
+						$('#flightDetails').show('slow');
 				})
 				.fail(function () {
 					console.log('error');
+					$('img.loader').hide();
 				});
 		}
 		$('menu a.navlink').attr('href', '/search');
