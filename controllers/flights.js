@@ -56,6 +56,14 @@ module.exports.results = function (req, res) {
     res.render('results', {title: 'Flights', departureDate: departureDate, departureAirport: departureAirport, arrivalAirport: arrivalAirport});
 };
 
+module.exports.details = function (req, res) {
+    var departureDate = req.query.departureDate, 
+		departureAirport = req.query.departureAirport, 
+		arrivalAirport = req.query.arrivalAirport, 
+        productKey = req.query.productKey;
+    res.render('details', {title: 'Flight Details', departureDate: departureDate, departureAirport: departureAirport, arrivalAirport: arrivalAirport, productKey: productKey});
+};
+
 
 module.exports.flightDetail = function(req, res){
     var departureDate = req.query.departureDate, 
