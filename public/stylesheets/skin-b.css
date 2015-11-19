@@ -5,9 +5,13 @@ background: -moz-radial-gradient(center, ellipse cover,  #eeeeee 0%, #cccccc 100
 background: -webkit-radial-gradient(center, ellipse cover,  #eeeeee 0%,#cccccc 100%); /* Chrome10-25,Safari5.1-6 */
 background: radial-gradient(ellipse at center,  #eeeeee 0%,#cccccc 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+background-image: url('/images/airplane-bg.jpg');
+background-size: cover;
 }
+
 header, footer {background-color: #6d6d6d;}
 section.box {background: rgba(109, 109, 109, 0.9)}
+section.box.search-form {background-color: rgba(109, 109, 109, 0.3);}
 input[type='submit'] {background: rgb(56, 58, 60); color: #fff;}
 input[type='submit']:hover {color: red; background-color: rgb(40, 40, 40)}
 p.flight-leg, section.leg p, section.leg + p {color: #eee;}
