@@ -10,5 +10,6 @@ router.get('/search', ctrl.search);
 router.get('/results', ctrl.results);
 router.get('/details', ctrl.details);
 router.get('/flight-detail', ctrl.flightDetail);
+router.get('/seating-map', ctrl.seatingMap);
 
 module.exports = router;

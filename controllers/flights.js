@@ -8,6 +8,10 @@ module.exports.search = function(req, res){
 	res.render('search', { title: 'Search Flights', noNav: true});
 };
 
+module.exports.seatingMap = function(req, res){
+	res.render('seating-map', { title: 'Seating Map', noNav: true});
+};
+
 module.exports.flights = function(req, res){
 	var departureDate = req.query.departureDate, 
 		departureAirport = req.query.departureAirport, 
