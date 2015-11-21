@@ -38,7 +38,7 @@ SS.seatingChart = function (data) {
             return ('translate(' + offsetx * (index % seatsinrow) + ',' + offsety + ')');
         }, 
         
-        updateSeatSeletion = function () {
+        updateSeatSelection = function () {
             var $selector = $('#selectedSeats'), 
                 selectedSeats = localStorage.selectedSeats;
             $selector.find('p').remove();
@@ -87,7 +87,7 @@ SS.seatingChart = function (data) {
                             thisSeat = ',' + thisSeat;
                         }
                         window.localStorage.selectedSeats += thisSeat;
-                        updateSeatSeletion();
+                        updateSeatSelection();
                     } else {
                         this.style.fill = vacantbgcolor;
                         var thisSeat = d.row + d.seat,
@@ -96,7 +96,7 @@ SS.seatingChart = function (data) {
                             if (thisSeat === item) {
                                 selectedSeats.splice(i, 1);
                                 localStorage.setItem('selectedSeats', selectedSeats);
-                                updateSeatSeletion();
+                                updateSeatSelection();
                             }
 
                         })
@@ -124,7 +124,7 @@ SS.seatingChart = function (data) {
     });
 
 
-    //clear localStorage before intercting with the map
+    //clear localStorage before interacting with the map
     window.localStorage.selectedSeats = '';
 };
 
