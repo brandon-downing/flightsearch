@@ -18,6 +18,7 @@ SS.seatingChart = function (data) {
         vacantbgcolor = '#ffffff',
         strokecolor = '#333333',
         selectedcolor = 'rgb(230, 230, 199)',
+        selectedcolorhex = '#e6e6c7',
         offsetx = seatwidth + 5,
         offsety = 0,
         rowcount = 0,
@@ -80,7 +81,7 @@ SS.seatingChart = function (data) {
             })
             .on('click', function (d, i) {
                 if (this.className.baseVal === 'available') {
-                    if (this.style.fill !== selectedcolor) {
+                    if (this.style.fill !== selectedcolor && this.style.fill !== selectedcolorhex) {
                         this.style.fill = selectedcolor;
                         var thisSeat = d.row + d.seat;
                         if (window.localStorage.selectedSeats.length > 0) {

@@ -11,7 +11,7 @@ text {
 
 rect.available:hover,
 rect.available.selected {
-    fill: #E6E6C7;
+    fill: rgb(230, 230, 199);
     cursor: pointer;
 }
 
