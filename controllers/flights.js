@@ -8,6 +8,10 @@ module.exports.search = function(req, res){
 	res.render('search', { title: 'Search Flights', noNav: true});
 };
 
+module.exports.find = function(req, res){
+	res.render('search-flex', { title: 'Find Flights', noNav: true});
+};
+
 module.exports.seatingMap = function(req, res){
 	res.render('seating-map', { title: 'Seating Map', noNav: true});
 };
@@ -60,12 +64,27 @@ module.exports.results = function (req, res) {
     res.render('results', {title: 'Flights', departureDate: departureDate, departureAirport: departureAirport, arrivalAirport: arrivalAirport});
 };
 
+module.exports.resultsflex = function (req, res) {
+    var departureDate = req.query.departureDate, 
+		departureAirport = req.query.departureAirport, 
+		arrivalAirport = req.query.arrivalAirport;
+    res.render('results-flex', {title: 'Flights', departureDate: departureDate, departureAirport: departureAirport, arrivalAirport: arrivalAirport, isFlex: true});
+};
+
 module.exports.details = function (req, res) {
     var departureDate = req.query.departureDate, 
 		departureAirport = req.query.departureAirport, 
 		arrivalAirport = req.query.arrivalAirport, 
         productKey = req.query.productKey;
     res.render('details', {title: 'Flight Details', departureDate: departureDate, departureAirport: departureAirport, arrivalAirport: arrivalAirport, productKey: productKey});
+};
+
+module.exports.detailsflex = function (req, res) {
+    var departureDate = req.query.departureDate, 
+		departureAirport = req.query.departureAirport, 
+		arrivalAirport = req.query.arrivalAirport, 
+        productKey = req.query.productKey;
+    res.render('details-flex', {title: 'Flight Details', departureDate: departureDate, departureAirport: departureAirport, arrivalAirport: arrivalAirport, productKey: productKey, isFlex: true});
 };
 
 

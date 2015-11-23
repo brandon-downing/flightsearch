@@ -10,7 +10,7 @@ var FS = {
 	populateAirportDropdowns: function(){
 		if(typeof airportsCodesNames !== 'undefined' && $('#departureAirport') && $('#arrivalAirport'))
 		$.each(airportsCodesNames, function(key, value){
-			var option = '<option value="'+key+'">'+value+'</option';
+			var option = '<option value="'+key+'">'+value+'</option>';
 			$('#departureAirport').append(option);
 			$('#arrivalAirport').append(option);
 
@@ -32,6 +32,23 @@ var FS = {
 				console.warn('error');
 			});
 		}
+	}, 
+	
+	populateSelectedValues: function () {
+		$('#departureAirport option').each(function () {
+				if ($(this).val() === localStorage.departureAirport) {
+					$(this).attr('selected', 'selected');
+				}
+			});
+			$('#arrivalAirport option').each(function () {
+				if ($(this).val() === localStorage.arrivalAirport) {
+					$(this).attr('selected', 'selected');
+				}
+			});
+			
+			if(localStorage.departureDate) {
+				$('#datepicker').val(localStorage.departureDate); 
+			}
 	}
 };
 
@@ -57,5 +74,6 @@ $(function(){
 		}
 	});
 	FS.getImage();
+	FS.populateSelectedValues();
 	
 });

@@ -38,7 +38,8 @@ var flightCard = React.createClass({
 					//console.log(seg);
 					var departureTimeFormatted = new Date(seg.departureTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
 						arrivalTimeFormatted = new Date(seg.arrivalTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }), 
-						detailUrl = 'details?departureDate='+departureDate+'&departureAirport='+ departureAirport +
+						detailspage = isFlex ? 'details-flex' : 'details', 
+						detailUrl = detailspage + '?departureDate='+departureDate+'&departureAirport='+ departureAirport +
 							'&arrivalAirport='+ arrivalAirport +'&productKey='+currentOffer.productKey;
 					return (<div>
 					           <div className="price">{currentOffer.totalFarePrice.formattedWholePrice}</div>
@@ -130,9 +131,13 @@ var isResults = $('#flightResults').length > 0,
 //check URL params, call for data and render component
 
 if (isResults){
+	console.log('isResults');
 	var hasParams = departureDate.length > 0 && departureAirport.length > 0 && arrivalAirport.length > 0,
 	url = "https://www.expedia.com:443/api/flight/search?departureDate=" + departureDate + "&departureAirport=" + departureAirport + "&arrivalAirport=" + arrivalAirport;
 if (hasParams) {
+	localStorage.setItem('departureDate', departureDate);
+	localStorage.setItem('departureAirport', departureAirport);
+	localStorage.setItem('arrivalAirport', arrivalAirport);
 	$('img.loader').show();
 	$.ajax({
 		url: url,
@@ -151,6 +156,7 @@ if (hasParams) {
 		});
 	}
 } else if (isDetails) {
+	console.log('isDetails');
 	var hasParams = departureDate.length > 0 && departureAirport.length > 0 && arrivalAirport.length > 0 && productKey.length > 0,
     	url = 'https://www.expedia.com:443/api/flight/details?departureDate='+ departureDate +'&departureAirport='+ departureAirport +'&arrivalAirport='+ arrivalAirport +'&productKey='+ productKey;
 
@@ -173,7 +179,9 @@ if (hasParams) {
 					$('img.loader').hide();
 				});
 		}
-		$('menu a.navlink').attr('href', '/search');
+		if (!isFlex) {
+			$('menu a.navlink').attr('href', '/search');
+		}
 }
 
 	

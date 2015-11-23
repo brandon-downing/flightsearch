@@ -31,3 +31,5 @@ a:hover {text-decoration:underline;}
 th {font-weight: bold;}
 em {font-style:italic;}
 strong {font-weight:bold;}
+
+.ui-datepicker.ui-widget {font-size: 90%;}

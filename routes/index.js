@@ -7,7 +7,10 @@ var express = require('express'),
 router.get('/', ctrl.home);
 router.get('/flights', ctrl.flights);
 router.get('/search', ctrl.search);
+router.get('/find', ctrl.find);
 router.get('/results', ctrl.results);
+router.get('/results-flex', ctrl.resultsflex);
+router.get('/details-flex', ctrl.detailsflex);
 router.get('/details', ctrl.details);
 router.get('/flight-detail', ctrl.flightDetail);
 router.get('/seating-map', ctrl.seatingMap);
