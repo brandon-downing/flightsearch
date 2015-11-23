@@ -6,7 +6,8 @@ background: -webkit-radial-gradient(center, ellipse cover,  #eeeeee 0%,#cccccc 1
 background: radial-gradient(ellipse at center,  #eeeeee 0%,#cccccc 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#eeeeee', endColorstr='#cccccc',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 background-image: url('/images/airplane-bg.jpg');
-background-size: cover;
+background-size: 100% 100%;
+background-repeat: no-repeat;
 }
 
 header, footer {background-color: #6d6d6d;}
