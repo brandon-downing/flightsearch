@@ -18,6 +18,7 @@ SS.seatingChart = function (data) {
         vacantbgcolor = '#ffffff',
         strokecolor = '#333333',
         selectedcolor = 'rgb(230, 230, 199)',
+        selectedcolorhex = '#e6e6c7',
         offsetx = seatwidth + 5,
         offsety = 0,
         rowcount = 0,
@@ -38,7 +39,7 @@ SS.seatingChart = function (data) {
             return ('translate(' + offsetx * (index % seatsinrow) + ',' + offsety + ')');
         }, 
         
-        updateSeatSeletion = function () {
+        updateSeatSelection = function () {
             var $selector = $('#selectedSeats'), 
                 selectedSeats = localStorage.selectedSeats;
             $selector.find('p').remove();
@@ -80,14 +81,14 @@ SS.seatingChart = function (data) {
             })
             .on('click', function (d, i) {
                 if (this.className.baseVal === 'available') {
-                    if (this.style.fill !== selectedcolor) {
+                    if (this.style.fill !== selectedcolor && this.style.fill !== selectedcolorhex) {
                         this.style.fill = selectedcolor;
                         var thisSeat = d.row + d.seat;
                         if (window.localStorage.selectedSeats.length > 0) {
                             thisSeat = ',' + thisSeat;
                         }
                         window.localStorage.selectedSeats += thisSeat;
-                        updateSeatSeletion();
+                        updateSeatSelection();
                     } else {
                         this.style.fill = vacantbgcolor;
                         var thisSeat = d.row + d.seat,
@@ -96,7 +97,7 @@ SS.seatingChart = function (data) {
                             if (thisSeat === item) {
                                 selectedSeats.splice(i, 1);
                                 localStorage.setItem('selectedSeats', selectedSeats);
-                                updateSeatSeletion();
+                                updateSeatSelection();
                             }
 
                         })
@@ -124,7 +125,7 @@ SS.seatingChart = function (data) {
     });
 
 
-    //clear localStorage before intercting with the map
+    //clear localStorage before interacting with the map
     window.localStorage.selectedSeats = '';
 };
 
