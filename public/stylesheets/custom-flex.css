@@ -40,7 +40,7 @@ section, p {line-height: 160%; margin: 0.5em 0;}
 
 section.box {width: 90%; max-width: 40em; min-width: 21em; padding: 1em; margin-bottom: .5em; background: rgba(211, 211, 211, 0.9)} 
 section.box.search-form {min-height: 20em; margin: auto;}
-section#flightDetails {margin:0 auto 3em; min-width: 40%;}
+section#flightDetails {margin:0 auto 3em; min-width: 40%; min-height: inherit;}
 section#flightResults {display:flex; justify-content: center;}
 
 section#flightResults > div {
