@@ -172,7 +172,7 @@ if (hasParams) {
 					}),
 						document.getElementById('flightDetails'));
 						$('img.loader').hide();
-						$('#flightDetails').show('slow');
+						$('#flightDetails').addClass('flex-container');
 				})
 				.fail(function () {
 					console.log('error');

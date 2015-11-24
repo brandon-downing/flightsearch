@@ -1,0 +1,26 @@
+.flex-container {
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+    }
+
+	.flex-container-column {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .flex-container-row {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: initial;
+    }
+    .flex-item-row { width:98%; }
+
+
+    .flex-item-col-4 {
+        flex-basis: 22%; /* takes into account margins and paddings, can't really be 25% */
+
+        /* failover rules for old IEs, don't affect the flex display in any way */
+        width: 22%;
+        float: left;
+    }

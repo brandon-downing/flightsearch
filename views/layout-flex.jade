@@ -4,6 +4,7 @@ html
     title= title
     meta(name="viewport", content="width=device-width, initial-scale=1")
     link(rel='stylesheet', href='/stylesheets/global.css')
+    link(rel='stylesheet', href='/stylesheets/flexbox.css')
     link(rel='stylesheet', href='/stylesheets/custom-flex.css')
     link(rel='stylesheet', href='/stylesheets/skin-flex.css')
     link(rel='stylesheet', href='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css')
@@ -12,7 +13,7 @@ html
     script(src='/javascripts/airports.js')
     script(src='/javascripts/fs-lib.js')
   body
-     main
+     main.flex-container.flex-container-column
        header
           nav
              menu
