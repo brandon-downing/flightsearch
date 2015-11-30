@@ -33,7 +33,7 @@ $('#findArea').on('submit', function(e){
     e.preventDefault();
     area = $(this).find('input[name="area"]').val();
 
-    var geoApiUrl = 'http://terminal2.expedia.com/x/geo/features?ln.op=cn&ln.value='+ area +'&type=region&apikey=LhhGvIMEeKyxkApP38RSq5kz810l8gLT';
+    var geoApiUrl = '//terminal2.expedia.com/x/geo/features?ln.op=cn&ln.value='+ area +'&type=region&apikey=LhhGvIMEeKyxkApP38RSq5kz810l8gLT';
 
     $.ajax({
 				url: geoApiUrl,
@@ -92,7 +92,7 @@ function initMap(lat, lng) {
 
     </script>
     <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDYTKnCrJ4WAJZv8XL8W7EmezUNbEF8E3E">
+      src="//maps.googleapis.com/maps/api/js?key=AIzaSyDYTKnCrJ4WAJZv8XL8W7EmezUNbEF8E3E">
     </script>
   </body>
 </html>
