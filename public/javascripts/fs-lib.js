@@ -24,8 +24,12 @@ var FS = {
 					'&imageHeight=' +this.imageSize.height, 
 				dataType: 'json'
 			}).done(function(data){
-				 if($('.backgroundImage').length > 0) {
-					$('.backgroundImage').css('background-image','url('+data.imageUrl+')');
+				console.log(data);
+				if (data.imageUrl) {
+					// $('html').css('background-image','url('+data.imageUrl+')');
+					$('body').append('<img class="bgImage" src="' + data.imageUrl + '"/>');
+				} else {
+					$('html').css('background-image','url(/images/airplane-bg.jpg)').addClass('home');
 				}
 			})
 			.fail(function(){
