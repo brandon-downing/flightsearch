@@ -33,6 +33,9 @@ var flightCard = React.createClass({
 		return (_sortedData.legs.map(function (flight, flightid) {
 			var currentOffer = _sortedData.offers[flightid];
 
+            var nonStop = flight.segments.length === 1 ? true : false;
+            var nonStopBadge = nonStop ? React.DOM.span({title: 'non-stop'}, ':-)') : '';
+
 			return React.DOM.section({ key: flightid, 'data-flightid': flight.legId, className: 'box' },
 				flight.segments.map(function (seg, segid, segarray) {
 					//console.log(seg);
@@ -46,6 +49,7 @@ var flightCard = React.createClass({
                         var detailUrl = detailspage + '?departureDate='+departureDate+'&departureAirport='+ departureAirport +
 							'&arrivalAirport='+ arrivalAirport +'&productKey='+currentOffer.productKey;
 					return (<div>
+                                <div className="badges">{nonStopBadge}</div>
 					           <div className="price">{currentOffer.totalFarePrice.formattedWholePrice}</div>
 							   <a href={detailUrl}>
 							   		<button className="select-flight"> select</button>
