@@ -38,8 +38,12 @@ var flightCard = React.createClass({
 					//console.log(seg);
 					var departureTimeFormatted = new Date(seg.departureTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
 						arrivalTimeFormatted = new Date(seg.arrivalTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }), 
-						detailspage = isFlex ? 'details-flex' : 'details', 
-						detailUrl = detailspage + '?departureDate='+departureDate+'&departureAirport='+ departureAirport +
+						detailspage = isFlex ? 'details-flex' : 'details';
+                        if(isBadging) {
+                            detailspage = 'details-badging';
+                        }
+
+                        var detailUrl = detailspage + '?departureDate='+departureDate+'&departureAirport='+ departureAirport +
 							'&arrivalAirport='+ arrivalAirport +'&productKey='+currentOffer.productKey;
 					return (<div>
 					           <div className="price">{currentOffer.totalFarePrice.formattedWholePrice}</div>

@@ -1,0 +1,32 @@
+extends layout-badging
+
+block content
+   div.backgroundImage-home
+   section.box.search-form
+    h1= title
+    form#flight-search(action="/results-badging")
+      div#date-container
+         label On 
+         input#datepicker(
+           name="departureDate"
+           type="text"
+           placeholder="Select date"
+         )
+      div#origin-container
+        label From
+        select(name="departureAirport" id="departureAirport")
+            option(value="") Select origin
+    
+  
+      div#dest-container
+        label To
+        select(name="arrivalAirport" id="arrivalAirport")
+            option(value="") Select destination
+            
+      input(
+          type="submit"
+          value="Search"
+      )
+   
+   
+    script $("#datepicker").datepicker({dateFormat: 'yy-mm-dd', minDate: new Date(), numberOfMonths:2});  

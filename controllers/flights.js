@@ -12,6 +12,10 @@ module.exports.find = function(req, res){
 	res.render('search-flex', { title: 'Find Flights', noNav: true});
 };
 
+module.exports.badging = function(req, res){
+	res.render('badging', { title: 'Find Flights', noNav: true});
+};
+
 module.exports.findarea = function(req, res){
 	res.render('findarea', { title: 'Find Area'});
 };
@@ -75,6 +79,13 @@ module.exports.resultsflex = function (req, res) {
     res.render('results-flex', {title: 'Flights', departureDate: departureDate, departureAirport: departureAirport, arrivalAirport: arrivalAirport, isFlex: true});
 };
 
+module.exports.resultsbadging = function (req, res) {
+    var departureDate = req.query.departureDate,
+		departureAirport = req.query.departureAirport,
+		arrivalAirport = req.query.arrivalAirport;
+    res.render('results-badging', {title: 'Flights', departureDate: departureDate, departureAirport: departureAirport, arrivalAirport: arrivalAirport, isFlex: true, isBadging: true});
+};
+
 module.exports.details = function (req, res) {
     var departureDate = req.query.departureDate, 
 		departureAirport = req.query.departureAirport, 
@@ -91,6 +102,13 @@ module.exports.detailsflex = function (req, res) {
     res.render('details-flex', {title: 'Flight Details', departureDate: departureDate, departureAirport: departureAirport, arrivalAirport: arrivalAirport, productKey: productKey, isFlex: true});
 };
 
+module.exports.detailsbadging = function (req, res) {
+    var departureDate = req.query.departureDate,
+		departureAirport = req.query.departureAirport,
+		arrivalAirport = req.query.arrivalAirport,
+        productKey = req.query.productKey;
+    res.render('details-badging', {title: 'Flight Details', departureDate: departureDate, departureAirport: departureAirport, arrivalAirport: arrivalAirport, productKey: productKey, isFlex: true, isBadging: true});
+};
 
 module.exports.flightDetail = function(req, res){
     var departureDate = req.query.departureDate, 
