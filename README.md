@@ -1,5 +1,7 @@
-# flightsearch
-To start the app, just use "npm start" at the command prompt. 
+Flight Search
+============
+###This is an example site, using Expedia APIs to deliver flight-search results. 
+To start the app, just use *npm start* at the command prompt. 
 
 Locally, the default port is 3000. 
 
