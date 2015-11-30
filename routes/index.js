@@ -8,6 +8,7 @@ router.get('/', ctrl.home);
 router.get('/flights', ctrl.flights);
 router.get('/search', ctrl.search);
 router.get('/find', ctrl.find);
+router.get('/findarea', ctrl.findarea);
 router.get('/results', ctrl.results);
 router.get('/results-flex', ctrl.resultsflex);
 router.get('/details-flex', ctrl.detailsflex);

@@ -12,6 +12,10 @@ module.exports.find = function(req, res){
 	res.render('search-flex', { title: 'Find Flights', noNav: true});
 };
 
+module.exports.findarea = function(req, res){
+	res.render('findarea', { title: 'Find Area'});
+};
+
 module.exports.seatingMap = function(req, res){
 	res.render('seating-map', { title: 'Seating Map', noNav: true});
 };
