@@ -3,7 +3,7 @@ var FS = {
 	
 	populateOrigDest: function(){
 		if (typeof departureAirport !== 'undefined' && typeof arrivalAirport !== 'undefined'){
-			$('#origin-destination').html(airportsCodesNames[departureAirport] +' - '+ airportsCodesNames[arrivalAirport]);
+			$('#origin-destination').hide().html('Flights from ' + airportsCodesNames[departureAirport] +' to '+ airportsCodesNames[arrivalAirport]).fadeIn();
 		}
 	}, 
 	
