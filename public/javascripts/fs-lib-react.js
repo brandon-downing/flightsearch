@@ -29,8 +29,6 @@ var flightCard = React.createClass({
 	_displayFlightResults: function () {
 		var self = this;
 		var _sortedData = this._sortOffers();
-		var cheapestMorning, cheapestAfternoon, cheapestNonStop, cheapestOneStop, mostSeatsRemaining;
-		
 		
 		
 		return (_sortedData.legs.map( function (flight, flightid) {
@@ -39,9 +37,9 @@ var flightCard = React.createClass({
                 flightDepartureTime = flight.segments[0].departureTime,
                 //flightDuration, 
                 stops = flight.segments.length-1, 
-                flightDistance, 
+                flightDistance = 0, 
                 seats = currentOffer.seatsRemaining;
-            console.log(flight);
+            //console.log(flight);
 			
             //console.log(currentOffer);
             //var nonStop = flight.segments.length === 1 ? true : false;
@@ -87,10 +85,7 @@ var flightCard = React.createClass({
 							</div>);
 				}),
 				
-				
-			//badge	
-			(function () {}), 
-			React.DOM.div({className: 'badge', 'data-distance': flightDistance},'')
+			React.DOM.div({className: 'badge', 'data-distance': flightDistance, 'data-stops': stops, 'data-seats': seats, 'data-flightid': flight.legId},'')
 				));
 		}));
 	},
@@ -161,12 +156,28 @@ var flightDetail = React.createClass({
 	}
 });
 
+
+
+var applyBadges = function(){
+	var cheapestMorning, cheapestAfternoon, cheapestNonStop, cheapestOneStop, mostSeatsRemaining;
+	var $badges = $('.badge'); 
+	$badges.each(function(index, item){
+		console.log($(item).attr('data-distance'));
+		console.log($(item).attr('data-stops'));
+		console.log($(item).attr('data-seats'));
+		console.log($(item).attr('data-flightid'));
+	});
+};
+
+
+
+
 var isResults = $('#flightResults').length > 0, 
 	isDetails = $('#flightDetails').length > 0;
 //check URL params, call for data and render component
 
 if (isResults){
-	console.log('isResults');
+	//console.log('isResults');
 	var hasParams = departureDate.length > 0 && departureAirport.length > 0 && arrivalAirport.length > 0,
 	url = "https://www.expedia.com:443/api/flight/search?departureDate=" + departureDate + "&departureAirport=" + departureAirport + "&arrivalAirport=" + arrivalAirport;
 if (hasParams) {
@@ -183,7 +194,11 @@ if (hasParams) {
 				initialData: data
 			}),
 				document.getElementById('flightResults'));
-				$('img.loader').hide();
+				
+				applyBadges();
+	
+	
+			$('img.loader').hide();
 		})
 		.fail(function () {
 			console.log('error');
