@@ -49,6 +49,10 @@ var flightCard = React.createClass({
 							'&arrivalAirport='+ arrivalAirport +'&productKey='+currentOffer.productKey;
 
 			return(React.DOM.section({ key: flightid, 'data-flightid': flight.legId, className: 'box' },
+
+                React.DOM.div({className: 'price'}, currentOffer.totalFarePrice.formattedWholePrice),
+                React.DOM.a({href: detailUrl }, React.DOM.button({className: 'select-flight btn-secondary btn-action t-select-btn'}, 'Select')),
+
 				flight.segments.map(function (seg, segid, segarray) {
 					//console.log(seg);
                 
@@ -72,7 +76,7 @@ var flightCard = React.createClass({
 									<strong>{seg.arrivalAirportLocation.replace(/\,\ USA/g, '')}</strong>
 									<span className="airline">{seg.airlineName}</span>
 								</span>
-								<span classNames="col times">
+								<span className="col times">
 									<span className="time">{departureTimeFormatted}</span>
 									 &nbsp;&ndash;&nbsp;
 									<span className="time">{arrivalTimeFormatted}</span>
@@ -80,9 +84,6 @@ var flightCard = React.createClass({
 							</p>
 						</div>);
 				}),
-
-                React.DOM.div({className: 'price'}, currentOffer.totalFarePrice.formattedWholePrice),
-                React.DOM.a({href: detailUrl }, React.DOM.button({className: 'select-flight btn-secondary btn-action t-select-btn'}, 'Select')),
 
                 React.DOM.div({className: 'badges', 'data-distance': flightDistance, 'data-stops': stops, 'data-seats': seats, 'data-flightid': flight.legId,
                           'data-price': currentOffer.totalFarePrice.amount, 'data-time': flightDepartureTime},'')
@@ -247,7 +248,8 @@ var applyBadges = function(){
     $('.badges[data-flightid="'+ cheapestEvening +'"]').append('<span class="cheapest-evening">Cheapest evening flight!</span>');
     $('.badges[data-flightid="'+ cheapestNonStop +'"]').append('<span class="cheapest-nonstop">Cheapest non-stop flight!</span>');
     $('.badges[data-flightid="'+ cheapestOneStop +'"]').append('<span class="cheapest-onestop">Cheapest one-stop flight!</span>');
-    $('.badges[data-flightid="'+ mostSeatsRemaining +'"]').append('<span class="most-seats">Emptiest flight!</span>');
+    $('.badges[data-flightid="'+ mostSeatsRemaining +'"]').append('<span class="most-seats">Most seats left!</span>');
+
 
 };// end applyBadges
 
