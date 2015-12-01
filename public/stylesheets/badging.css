@@ -7,10 +7,7 @@ html {
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
-}
-
-html.home {
-	background-color: #bccae3;
+	background-position: 50% 0;
 }
 
 .bgImage {
@@ -23,12 +20,20 @@ html.home {
 	z-index: -1;
 	width: 100%;
 	transform: scale(1);
+	min-height: 100%;
 }
 
 .bgImage.shown {
 	opacity: 1;
 	transform: scale(1.1);
 	transition: .5s all ease-in-out;
+}
+
+.home .bgImage {
+	height: 100%;
+	width: auto;
+	left: auto;
+	right: -20%;
 }
 
 body {
@@ -47,7 +52,7 @@ body:after {
 }
 
 header {
-	background: #fff;
+	background: rgba(255,255,255,.9);
 	padding: 10px 50px;
 }
 
@@ -57,7 +62,10 @@ header menu {
 }
 
 .home header {
-	display: none;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
 }
 
 .flex-container-column {
@@ -87,6 +95,7 @@ a.btn-secondary, button.btn-secondary {
 
 .search-form {
 	width: 60%;
+	max-width: 720px;
 	background: rgba(255,255,255,.9);
 }
 
