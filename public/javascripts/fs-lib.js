@@ -29,7 +29,11 @@ var FS = {
 					// $('html').css('background-image','url('+data.imageUrl+')');
 					$('body').append('<img class="bgImage" src="' + data.imageUrl + '"/>');
 				} else {
-					$('html').css('background-image','url(/images/airplane-bg.jpg)').addClass('home');
+					// $('html').css('background-image','url(/images/airplane-bg.jpg)').addClass('home');
+					$('body').append('<img class="bgImage" src="/images/airplane-bg.jpg"/>');
+					$('.bgImage').load(function() {
+					  $(this).addClass('shown');
+					});
 				}
 			})
 			.fail(function(){
@@ -58,6 +62,9 @@ var FS = {
 
 
 $(function(){
+	if ($('#flight-search').length) {
+		$('html').addClass('home');
+	}
 	//functions to run on DOM ready
 	FS.populateOrigDest();
 	FS.populateAirportDropdowns();

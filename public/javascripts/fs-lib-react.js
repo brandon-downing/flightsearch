@@ -48,13 +48,18 @@ var flightCard = React.createClass({
             var detailUrl = detailspage + '?departureDate='+departureDate+'&departureAirport='+ departureAirport +
 							'&arrivalAirport='+ arrivalAirport +'&productKey='+currentOffer.productKey;
 
+			var price = currentOffer.totalFarePrice.formattedPrice.split('.');
+			var formattedPrice = <div>
+									{price[0]}
+									<sup className="cents">.{price[1]}</sup>
+								</div>; 
+
 			return(React.DOM.section({ key: flightid, 'data-flightid': flight.legId, className: 'box' },
 
-                React.DOM.div({className: 'price'}, currentOffer.totalFarePrice.formattedWholePrice),
+                React.DOM.div({className: 'price'}, formattedPrice),
                 React.DOM.a({href: detailUrl }, React.DOM.button({className: 'select-flight btn-secondary btn-action t-select-btn'}, 'Select')),
 
 				flight.segments.map(function (seg, segid, segarray) {
-					//console.log(seg);
                 
 					var departureTime = seg.departureTime, 
                         duration = seg.duration,
@@ -257,7 +262,7 @@ var applyBadges = function(){
     $('.badges[data-flightid="'+ cheapestEvening +'"]').append('<span class="cheapest-evening">Cheapest evening flight!</span>');
     $('.badges[data-flightid="'+ cheapestNonStop +'"]').append('<span class="cheapest-nonstop">Cheapest non-stop flight!</span>');
     $('.badges[data-flightid="'+ cheapestOneStop +'"]').append('<span class="cheapest-onestop">Cheapest one-stop flight!</span>');
-    $('.badges[data-flightid="'+ mostSeatsRemaining +'"]').append('<span class="most-seats">Most seats left!</span>');
+    $('.badges[data-flightid="'+ mostSeatsRemaining +'"]').append('<span class="most-seats">Emptiest flight!</span>');
 
     if(findTrends){
         $('.badges:eq(0)').append('<span class="best-trended">One of the cheapest this week!</span>');
@@ -306,6 +311,7 @@ if (hasParams) {
 		dataType: 'json'
 				})
 		.done(function (data) {
+			$('img.loader').hide();
 			React.render(React.createElement(flightCard, {
 				initialData: data
 			}),
@@ -314,7 +320,7 @@ if (hasParams) {
 				applyBadges();
                 //findTrends();
 	
-			$('img.loader').hide();
+			
 		})
 		.fail(function () {
 			console.log('error');
