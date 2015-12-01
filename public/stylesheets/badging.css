@@ -102,25 +102,48 @@ a.btn-secondary, button.btn-secondary {
 	width: 80%;
 }
 
-.badges > span {
+.airlineLogo {
+	float: left;
+	width: 30px;
+}
+
+.airline {
+	display: block;
+}
+
+.segment {
+	overflow: hidden;
+	margin-top: 15px;
+}
+
+.segment:first-child {
+	margin-top: 0;
+}
+
+.flight-leg {
+	margin-left: 45px;
+}
+
+.flight-leg .col {
+	float: left;
+	width: 35%;
+	padding: 0;
+}
+
+.flight-leg .icon-arrow90 {
+	margin: 0 10px;
+	color: #c7c7c7;
+}
+
+.box .price, .box .select-flight {
+	font-weight: bold;
 	position: absolute;
-	right: -20px;
-	top: 0;
-	background: red;
-	color: #fff;
-	display: inline-block;
-	text-align: center;
-	line-height: 40px;
-	width: 40px;
-	border-radius: 50%;
+	top: 20px;
+	right: 20px;
 }
 
-.price, .select-flight {
-	float: right;
-}
-
-.select-flight {
-	clear: right;
+.box .select-flight {
+	top: 50px;
 }
 
 .loader {
@@ -240,3 +263,39 @@ a.btn-secondary, button.btn-secondary {
 .ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next {
 	top: 10px;
 }
+
+.badges, .badges:empty {
+	display: block;
+	position: absolute;
+	top: 20px;
+	left: 57%;
+	width: 30%;
+}
+
+.badges span:first-child:before {
+	content: '✓';
+	float: left;
+	font-size: 36px;
+	line-height: 25px;
+	border-radius: 50%;
+	margin: 0 10px 10px 0;
+	background: #477a00;
+	display: inline-block;
+	color: #fff;
+	text-align: center;
+	height: 25px;
+	width: 25px;
+	text-shadow: 1px 2px 0 rgba(0,55,0,.7);
+}
+
+.badges span {
+	display: block;
+	font-size: 12px;
+	color: green;
+	text-align: left;
+}
+
+
+
+
+
