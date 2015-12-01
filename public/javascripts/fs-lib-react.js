@@ -38,12 +38,15 @@ var flightCard = React.createClass({
                 //flightDuration, 
                 stops = flight.segments.length-1, 
                 flightDistance = 0, 
-                seats = currentOffer.seatsRemaining;
-            //console.log(flight);
-			
-            //console.log(currentOffer);
-            //var nonStop = flight.segments.length === 1 ? true : false;
-            //var nonStopBadge = nonStop ? React.DOM.span({title: 'non-stop'}, ':-)') : '';
+                seats = currentOffer.seatsRemaining,
+                detailspage = isFlex ? 'details-flex' : 'details';
+
+            if(typeof isBadging !== 'undefined' && isBadging) {
+                detailspage = 'details-badging';
+            }
+
+            var detailUrl = detailspage + '?departureDate='+departureDate+'&departureAirport='+ departureAirport +
+							'&arrivalAirport='+ arrivalAirport +'&productKey='+currentOffer.productKey;
 
 			return(React.DOM.section({ key: flightid, 'data-flightid': flight.legId, className: 'box' },
 				flight.segments.map(function (seg, segid, segarray) {
@@ -53,27 +56,13 @@ var flightCard = React.createClass({
                         duration = seg.duration,
                         distance = seg.distance,
                         departureTimeFormatted = new Date(seg.departureTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
-						arrivalTimeFormatted = new Date(seg.arrivalTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }), 
-						detailspage = isFlex ? 'details-flex' : 'details';
+						arrivalTimeFormatted = new Date(seg.arrivalTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+
                 
                 //flightDuration += duration;
                 flightDistance += distance;
                 
-                
-                        if(typeof isBadging !== 'undefined' && isBadging) {
-                            detailspage = 'details-badging';
-                        }
-
-                        var detailUrl = detailspage + '?departureDate='+departureDate+'&departureAirport='+ departureAirport +
-							'&arrivalAirport='+ arrivalAirport +'&productKey='+currentOffer.productKey;
-                
-                
-                
-					return (<div>
-					           <div className="price">{currentOffer.totalFarePrice.formattedWholePrice}</div>
-							   <a href={detailUrl}>
-							   		<button className="select-flight btn-secondary btn-action t-select-btn">Select</button>
-								</a>
+                            return (<div>
 								<span className="airline">{seg.airlineName}</span>
 								<p className="flight-leg">
 									<strong>{seg.departureAirportLocation.replace(/\,\ USA/g, '')}</strong>
@@ -84,8 +73,11 @@ var flightCard = React.createClass({
 								</p>
 							</div>);
 				}),
-				
-			React.DOM.div({className: 'badge', 'data-distance': flightDistance, 'data-stops': stops, 'data-seats': seats, 'data-flightid': flight.legId,
+
+                React.DOM.div({className: 'price'}, currentOffer.totalFarePrice.formattedWholePrice),
+                React.DOM.a({href: detailUrl }, React.DOM.button({className: 'select-flight btn-secondary btn-action t-select-btn'}, 'Select')),
+
+                React.DOM.div({className: 'badge', 'data-distance': flightDistance, 'data-stops': stops, 'data-seats': seats, 'data-flightid': flight.legId,
                           'data-price': currentOffer.totalFarePrice.amount, 'data-time': flightDepartureTime},'')
 				));
 		}));
@@ -161,8 +153,11 @@ var flightDetail = React.createClass({
 
 
 var applyBadges = function(){
+
 	var badgePrice, badgePriceRedEye, badgePriceMorning, badgePriceAfternoon, badgePriceEvening, badgePriceNonStop, badgePriceOneStop, badgeSeats, cheapestRedEye, cheapestMorning, cheapestAfternoon, cheapestEvening, cheapestNonStop, cheapestOneStop, mostSeatsRemaining;
-	var $badges = $('.badge'); 
+
+    var $badges = $('.badge');
+
 	$badges.each(function(index, item){
         var time = new Date($(item).attr('data-time')),
             stops = parseInt($(item).attr('data-stops')),
@@ -237,6 +232,7 @@ var applyBadges = function(){
             mostSeatsRemaining = $(item).attr('data-flightid');
         }
 	});
+
 
     //attach classes for badging
     $('.badge[data-flightid="'+ cheapestRedEye +'"]').addClass('cheapest-redeye');
