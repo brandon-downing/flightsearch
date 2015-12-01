@@ -162,7 +162,7 @@ var flightDetail = React.createClass({
 
 var applyBadges = function(){
 
-	var badgePrice, badgePriceRedEye, badgePriceMorning, badgePriceAfternoon, badgePriceEvening, badgePriceNonStop, badgePriceOneStop, badgeSeats, cheapestRedEye, cheapestMorning, cheapestAfternoon, cheapestEvening, cheapestNonStop, cheapestOneStop, mostSeatsRemaining;
+	var lowestPrice, badgePriceRedEye, badgePriceMorning, badgePriceAfternoon, badgePriceEvening, badgePriceNonStop, badgePriceOneStop, badgeSeats, cheapestRedEye, cheapestMorning, cheapestAfternoon, cheapestEvening, cheapestNonStop, cheapestOneStop, mostSeatsRemaining, badgeLowestTrendedPrice;
 
     var $badges = $('.badges');
 
@@ -187,6 +187,13 @@ var applyBadges = function(){
             timeEvening.setMinutes(59);
 
        //determine cheapest redeye flight
+    if(lowestPrice === undefined || price < lowestPrice) {
+        lowestPrice = parseFloat(price);
+    }
+
+
+
+
         if (time.getTime() <= timeRedEye.getTime()) {
             if(badgePriceRedEye === undefined || badgePriceRedEye >= price) {
               cheapestRedEye = $(item).attr('data-flightid');
@@ -239,8 +246,10 @@ var applyBadges = function(){
             badgeSeats = seats;
             mostSeatsRemaining = $(item).attr('data-flightid');
         }
-	});
 
+    });
+
+    findTrends(lowestPrice);
 
     $('.badges[data-flightid="'+ cheapestRedEye +'"]').append('<span class="cheapest-redeye">Cheapest red eye!</span>');
     $('.badges[data-flightid="'+ cheapestMorning +'"]').append('<span class="cheapest-morning">Cheapest morning flight!</span>');
@@ -250,32 +259,33 @@ var applyBadges = function(){
     $('.badges[data-flightid="'+ cheapestOneStop +'"]').append('<span class="cheapest-onestop">Cheapest one-stop flight!</span>');
     $('.badges[data-flightid="'+ mostSeatsRemaining +'"]').append('<span class="most-seats">Most seats left!</span>');
 
+    if(findTrends){
+        $('.badges:eq(0)').append('<span class="best-trended">One of the cheapest this week!</span>');
+    }
 
 };// end applyBadges
 
 
-var findTrends = function (){
-    if (currentTrends) {
-        console.log(currentTrends);
+var findTrends = function (lowestPrice){
+if (currentTrends) {
+
+        //var prediction = currentTrends.recommended.predictionNextWeek.prediction;
+       // var movement = prediction > 0 ? 'increase' : 'drop';
+        //console.log('If you were to wait a week, the price may ' + movement+ ' by ' + prediction);
+
+        var trendedMedianPrice = currentTrends.recommended.trends.slice(0, 7).reduce(getLowest).median;
+
+        function getLowest (previousValue, currentValue) {
+            return parseInt(previousValue.median) < parseInt(currentValue.median) ?  previousValue : currentValue
+        }
+
+        console.log(typeof lowestPrice);
+            console.log(typeof trendedMedianPrice);
+
+        if (lowestPrice < parseFloat(trendedMedianPrice) * 1.1) {
+            return true;//badgeLowestTrendedPrice = $(item).attr('data-flightid');
+        }
     }
-    /*
-    var url = 'http://terminal2.expedia.com:80/x/flights/v3/search/1/' + departureAirport +'/' + arrivalAirport +'/' + departureDate +'?apikey=LhhGvIMEeKyxkApP38RSq5kz810l8gLT';
-    $.ajax({
-        url: url,
-        headers: {'Access-Control-Allow-Origin': '*'},
-        crossDomain : true,
-        jsonp: 'callback',
-       //contentType: 'text/plain',
-      dataType: 'jsonp'
-    })
-    .done( function (data) {
-        var data = JSON.parse(data);
-       console.log(data);
-    })
-    .fail(function (e) {
-        console.warn('error:' + e.message);
-    });
-    */
 };
 
 var isResults = $('#flightResults').length > 0, 
@@ -302,7 +312,7 @@ if (hasParams) {
 				document.getElementById('flightResults'));
 				
 				applyBadges();
-                findTrends();
+                //findTrends();
 	
 			$('img.loader').hide();
 		})
