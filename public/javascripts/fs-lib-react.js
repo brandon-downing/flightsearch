@@ -253,6 +253,31 @@ var applyBadges = function(){
 
 };// end applyBadges
 
+
+var findTrends = function (){
+    if (currentTrends) {
+        console.log(currentTrends);
+    }
+    /*
+    var url = 'http://terminal2.expedia.com:80/x/flights/v3/search/1/' + departureAirport +'/' + arrivalAirport +'/' + departureDate +'?apikey=LhhGvIMEeKyxkApP38RSq5kz810l8gLT';
+    $.ajax({
+        url: url,
+        headers: {'Access-Control-Allow-Origin': '*'},
+        crossDomain : true,
+        jsonp: 'callback',
+       //contentType: 'text/plain',
+      dataType: 'jsonp'
+    })
+    .done( function (data) {
+        var data = JSON.parse(data);
+       console.log(data);
+    })
+    .fail(function (e) {
+        console.warn('error:' + e.message);
+    });
+    */
+};
+
 var isResults = $('#flightResults').length > 0, 
 	isDetails = $('#flightDetails').length > 0;
 //check URL params, call for data and render component
@@ -277,7 +302,7 @@ if (hasParams) {
 				document.getElementById('flightResults'));
 				
 				applyBadges();
-	
+                findTrends();
 	
 			$('img.loader').hide();
 		})

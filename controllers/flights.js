@@ -83,7 +83,33 @@ module.exports.resultsbadging = function (req, res) {
     var departureDate = req.query.departureDate,
 		departureAirport = req.query.departureAirport,
 		arrivalAirport = req.query.arrivalAirport;
-    res.render('results-badging', {title: 'Flights', departureDate: departureDate, departureAirport: departureAirport, arrivalAirport: arrivalAirport, isFlex: true, isBadging: true});
+
+    var url = 'http://terminal2.expedia.com:80/x/flights/v3/search/1/' + departureAirport +'/' + arrivalAirport +'/' + departureDate +'?apikey=LhhGvIMEeKyxkApP38RSq5kz810l8gLT';
+
+    //call trends API on the server
+    var trends =  '';
+        request({url: url, method: 'GET'}, function(err, response, body){
+
+        if(err){
+            console.log(err);
+        } else if (response.statusCode === 200) {
+                var responseBody = JSON.parse(body);
+                    trends =  JSON.stringify(responseBody);
+        res.render('results-badging', {title: 'Flights', departureDate: departureDate, departureAirport: departureAirport, arrivalAirport: arrivalAirport, isFlex: true, isBadging: true, trends: trends});
+        } else {
+            console.log(response.statusCode);
+        }
+    });
+
+
+
+
+
+
+
+
+
+
 };
 
 module.exports.details = function (req, res) {
