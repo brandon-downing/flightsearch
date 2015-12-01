@@ -49,6 +49,10 @@ var flightCard = React.createClass({
 							'&arrivalAirport='+ arrivalAirport +'&productKey='+currentOffer.productKey;
 
 			return(React.DOM.section({ key: flightid, 'data-flightid': flight.legId, className: 'box' },
+
+                React.DOM.div({className: 'price'}, currentOffer.totalFarePrice.formattedWholePrice),
+                React.DOM.a({href: detailUrl }, React.DOM.button({className: 'select-flight btn-secondary btn-action t-select-btn'}, 'Select')),
+
 				flight.segments.map(function (seg, segid, segarray) {
 					//console.log(seg);
                 
@@ -56,28 +60,32 @@ var flightCard = React.createClass({
                         duration = seg.duration,
                         distance = seg.distance,
                         departureTimeFormatted = new Date(seg.departureTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
-						arrivalTimeFormatted = new Date(seg.arrivalTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+						arrivalTimeFormatted = new Date(seg.arrivalTime).toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+						airlineLogo = 'images/' + seg.airlineCode + '_sq.jpg';
 
                 
                 //flightDuration += duration;
                 flightDistance += distance;
                 
-                            return (<div>
-								<span className="airline">{seg.airlineName}</span>
-								<p className="flight-leg">
+                return (<div className="segment">
+                        	<img src={airlineLogo} alt={seg.airlineName} className="airlineLogo" />
+							<p className="flight-leg">
+								<span className="col">
 									<strong>{seg.departureAirportLocation.replace(/\,\ USA/g, '')}</strong>
-									<span className="time">({departureTimeFormatted})</span>
-									 &nbsp;&ndash;&nbsp;
+									<span className="icon icon-arrow90"></span>
 									<strong>{seg.arrivalAirportLocation.replace(/\,\ USA/g, '')}</strong>
-									<span className="time">({arrivalTimeFormatted})</span>
-								</p>
-							</div>);
+									<span className="airline">{seg.airlineName}</span>
+								</span>
+								<span className="col times">
+									<span className="time">{departureTimeFormatted}</span>
+									 &nbsp;&ndash;&nbsp;
+									<span className="time">{arrivalTimeFormatted}</span>
+								</span>
+							</p>
+						</div>);
 				}),
 
-                React.DOM.div({className: 'price'}, currentOffer.totalFarePrice.formattedWholePrice),
-                React.DOM.a({href: detailUrl }, React.DOM.button({className: 'select-flight btn-secondary btn-action t-select-btn'}, 'Select')),
-
-                React.DOM.div({className: 'badge', 'data-distance': flightDistance, 'data-stops': stops, 'data-seats': seats, 'data-flightid': flight.legId,
+                React.DOM.div({className: 'badges', 'data-distance': flightDistance, 'data-stops': stops, 'data-seats': seats, 'data-flightid': flight.legId,
                           'data-price': currentOffer.totalFarePrice.amount, 'data-time': flightDepartureTime},'')
 				));
 		}));
@@ -156,7 +164,7 @@ var applyBadges = function(){
 
 	var badgePrice, badgePriceRedEye, badgePriceMorning, badgePriceAfternoon, badgePriceEvening, badgePriceNonStop, badgePriceOneStop, badgeSeats, cheapestRedEye, cheapestMorning, cheapestAfternoon, cheapestEvening, cheapestNonStop, cheapestOneStop, mostSeatsRemaining;
 
-    var $badges = $('.badge');
+    var $badges = $('.badges');
 
 	$badges.each(function(index, item){
         var time = new Date($(item).attr('data-time')),
@@ -234,14 +242,14 @@ var applyBadges = function(){
 	});
 
 
-    //attach classes for badging
-    $('.badge[data-flightid="'+ cheapestRedEye +'"]').addClass('cheapest-redeye');
-    $('.badge[data-flightid="'+ cheapestMorning +'"]').addClass('cheapest-morning');
-    $('.badge[data-flightid="'+ cheapestAfternoon +'"]').addClass('cheapest-afternoon');
-    $('.badge[data-flightid="'+ cheapestEvening +'"]').addClass('cheapest-evening');
-    $('.badge[data-flightid="'+ cheapestNonStop +'"]').addClass('cheapest-nonstop');
-    $('.badge[data-flightid="'+ cheapestOneStop +'"]').addClass('cheapest-onestop');
-    $('.badge[data-flightid="'+ mostSeatsRemaining +'"]').addClass('most-seats');
+    $('.badges[data-flightid="'+ cheapestRedEye +'"]').append('<span class="cheapest-redeye">Cheapest red eye!</span>');
+    $('.badges[data-flightid="'+ cheapestMorning +'"]').append('<span class="cheapest-morning">Cheapest morning flight!</span>');
+    $('.badges[data-flightid="'+ cheapestAfternoon +'"]').append('<span class="cheapest-afternoon">Cheapest afternoon flight!</span>');
+    $('.badges[data-flightid="'+ cheapestEvening +'"]').append('<span class="cheapest-evening">Cheapest evening flight!</span>');
+    $('.badges[data-flightid="'+ cheapestNonStop +'"]').append('<span class="cheapest-nonstop">Cheapest non-stop flight!</span>');
+    $('.badges[data-flightid="'+ cheapestOneStop +'"]').append('<span class="cheapest-onestop">Cheapest one-stop flight!</span>');
+    $('.badges[data-flightid="'+ mostSeatsRemaining +'"]').append('<span class="most-seats">Most seats left!</span>');
+
 
 };// end applyBadges
 

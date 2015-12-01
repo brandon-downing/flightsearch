@@ -71,6 +71,7 @@ a.btn-secondary, button.btn-secondary {
 
 .box {
 	color: #1f1f1f;
+	background: rgba(255,255,255,.9);
 	position: relative;
 }
 
@@ -84,10 +85,6 @@ a.btn-secondary, button.btn-secondary {
 	margin-top: 10px;
 }
 
-.box > div {
-	clear: both; 
-}
-
 .search-form {
 	width: 60%;
 	background: rgba(255,255,255,.9);
@@ -95,6 +92,7 @@ a.btn-secondary, button.btn-secondary {
 
 .flex-results {
 	width: 100%;
+	max-width: 1280px;
 	align-content: stretch;
 }
 
@@ -102,25 +100,60 @@ a.btn-secondary, button.btn-secondary {
 	width: 80%;
 }
 
-.badges > span {
-	position: absolute;
-	right: -20px;
-	top: 0;
-	background: red;
-	color: #fff;
-	display: inline-block;
-	text-align: center;
-	line-height: 40px;
-	width: 40px;
-	border-radius: 50%;
+.airlineLogo {
+	float: left;
+	width: 30px;
 }
 
-.price, .select-flight {
+.airline {
+	display: block;
+}
+
+.segment {
+	float: left;
+	width: 55%;
+	overflow: hidden;
+}
+
+a + .segment {
+	margin-top: -26px;
+}
+
+.segment + .segment {
+	margin-top: 15px;
+}
+
+.flight-leg {
+	margin-left: 45px;
+}
+
+.flight-leg .col {
+	float: left;
+	width: 40%;
+	padding: 0;
+}
+
+.flight-leg .col:first-child {
+	width: 58%;
+	margin-right: 2%;
+}
+
+.flight-leg .icon-arrow90 {
+	margin: 0 10px;
+	color: #c7c7c7;
+}
+
+.box .price, .box .select-flight {
 	float: right;
+	clear: right;
+	width: 10%;
 }
 
-.select-flight {
-	clear: right;
+.box .price {
+	text-align: right;
+	font-weight: bold;
+	display: block;
+	margin-bottom: 5px;
 }
 
 .loader {
@@ -239,4 +272,35 @@ a.btn-secondary, button.btn-secondary {
 
 .ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next {
 	top: 10px;
+}
+
+.badges, .badges:empty {
+	display: block;
+	position: absolute;
+	top: 20px;
+	left: 57%;
+	width: 29%;
+}
+
+.badges span:first-child:before {
+	content: '✓';
+	float: left;
+	font-size: 36px;
+	line-height: 25px;
+	border-radius: 50%;
+	margin: 0 10px 10px 0;
+	background: #477a00;
+	display: inline-block;
+	color: #fff;
+	text-align: center;
+	height: 25px;
+	width: 25px;
+	text-shadow: 1px 2px 0 rgba(0,55,0,.7);
+}
+
+.badges span {
+	display: block;
+	font-size: 12px;
+	color: green;
+	text-align: left;
 }
