@@ -71,6 +71,7 @@ a.btn-secondary, button.btn-secondary {
 
 .box {
 	color: #1f1f1f;
+	background: rgba(255,255,255,.9);
 	position: relative;
 }
 
@@ -84,10 +85,6 @@ a.btn-secondary, button.btn-secondary {
 	margin-top: 10px;
 }
 
-.box > div {
-	clear: both; 
-}
-
 .search-form {
 	width: 60%;
 	background: rgba(255,255,255,.9);
@@ -95,6 +92,7 @@ a.btn-secondary, button.btn-secondary {
 
 .flex-results {
 	width: 100%;
+	max-width: 1280px;
 	align-content: stretch;
 }
 
@@ -112,12 +110,17 @@ a.btn-secondary, button.btn-secondary {
 }
 
 .segment {
+	float: left;
+	width: 55%;
 	overflow: hidden;
-	margin-top: 15px;
 }
 
-.segment:first-child {
-	margin-top: 0;
+a + .segment {
+	margin-top: -26px;
+}
+
+.segment + .segment {
+	margin-top: 15px;
 }
 
 .flight-leg {
@@ -126,8 +129,13 @@ a.btn-secondary, button.btn-secondary {
 
 .flight-leg .col {
 	float: left;
-	width: 35%;
+	width: 40%;
 	padding: 0;
+}
+
+.flight-leg .col:first-child {
+	width: 58%;
+	margin-right: 2%;
 }
 
 .flight-leg .icon-arrow90 {
@@ -136,14 +144,16 @@ a.btn-secondary, button.btn-secondary {
 }
 
 .box .price, .box .select-flight {
-	font-weight: bold;
-	position: absolute;
-	top: 20px;
-	right: 20px;
+	float: right;
+	clear: right;
+	width: 10%;
 }
 
-.box .select-flight {
-	top: 50px;
+.box .price {
+	text-align: right;
+	font-weight: bold;
+	display: block;
+	margin-bottom: 5px;
 }
 
 .loader {
@@ -269,7 +279,7 @@ a.btn-secondary, button.btn-secondary {
 	position: absolute;
 	top: 20px;
 	left: 57%;
-	width: 30%;
+	width: 29%;
 }
 
 .badges span:first-child:before {
@@ -294,8 +304,3 @@ a.btn-secondary, button.btn-secondary {
 	color: green;
 	text-align: left;
 }
-
-
-
-
-
