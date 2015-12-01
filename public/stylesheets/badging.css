@@ -1,6 +1,242 @@
-.badges {
-    position: absolute;
-    right: 1em;
-    top: 2em;
-    color: bisque;
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+html {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+}
+
+html.home {
+	background-color: #bccae3;
+}
+
+.bgImage {
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	top: 0;
+	opacity: 0;
+	z-index: -1;
+	width: 100%;
+	transform: scale(1);
+}
+
+.bgImage.shown {
+	opacity: 1;
+	transform: scale(1.1);
+	transition: .5s all ease-in-out;
+}
+
+body {
+	background-color: transparent;
+}
+
+body:after {
+	content: '';
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	background: rgba(255,255,255,.6);
+	z-index: -1;
+}
+
+header {
+	background: #fff;
+	padding: 10px 50px;
+}
+
+header menu {
+	margin: 0;
+	padding: 0;
+}
+
+.home header {
+	display: none;
+}
+
+.flex-container-column {
+	padding: 50px;
+}
+
+a.btn-secondary, button.btn-secondary {
+	padding: 7px 10px;
+	margin: 0;
+}
+
+.box {
+	color: #1f1f1f;
+	position: relative;
+}
+
+.box:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.box + .box {
+	margin-top: 10px;
+}
+
+.box > div {
+	clear: both; 
+}
+
+.search-form {
+	width: 60%;
+	background: rgba(255,255,255,.9);
+}
+
+.flex-results {
+	width: 100%;
+	align-content: stretch;
+}
+
+.flex-results > div {
+	width: 80%;
+}
+
+.badges > span {
+	position: absolute;
+	right: -20px;
+	top: 0;
+	background: red;
+	color: #fff;
+	display: inline-block;
+	text-align: center;
+	line-height: 40px;
+	width: 40px;
+	border-radius: 50%;
+}
+
+.price, .select-flight {
+	float: right;
+}
+
+.select-flight {
+	clear: right;
+}
+
+.loader {
+	display: none;
+	height: 100px;
+	width: 100px;
+	margin: 0 auto;
+}
+
+.flex-container {
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+}
+
+.flex-container-column {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.home .flex-container-column {
+	height: 100%;
+}
+
+.flex-container-row {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: initial;
+}
+
+.flex-item-row {
+    width: 98%;
+}
+
+.flex-item-col-4 {
+    flex-basis: 22%;
+    /* takes into account margins and paddings, can't really be 25% */
+    /* failover rules for old IEs, don't affect the flex display in any way */
+    width: 22%;
+    float: left;
+}
+
+.col-half {
+	float: left;
+	width: 48%;
+	margin-bottom: 20px;
+}
+
+.col-half + .col-half {
+	margin-left: 4%;
+}
+
+.col-half + button {
+	clear: left;
+	float: right;
+}
+
+.ui-datepicker {
+	font-size: .9em;
+	padding: 0;
+}
+
+.ui-widget {
+	font-family: inherit;
+}
+
+.ui-widget-content {
+	border: 0;
+}
+
+.ui-datepicker.ui-datepicker-multi {
+	border: 3px solid #0087f5;
+	border-radius: 5px;	
+}
+
+.ui-datepicker .ui-datepicker-group {
+	height: 280px;
+	padding: 10px;
+}
+
+.ui-datepicker .ui-datepicker-group-first {
+	border-right: 3px solid #0087f5;
+}
+
+.ui-datepicker .ui-state-default {
+	background: transparent;
+	border: 0;
+}
+
+.ui-datepicker td span, .ui-datepicker td a {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.ui-widget-content .ui-state-default {
+	font-weight: normal;
+	text-align: center;
+}
+
+.ui-widget-content .ui-state-hover {
+	background: #0087f5;
+	color: #fff;
+}
+
+.ui-widget-content .ui-state-active {
+	background: #00355f;
+	color: #fff; 
+}
+
+.ui-datepicker .ui-datepicker-header {
+	background: 0;
+	padding: .75em 0;
+	border: 0;
+}
+
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next {
+	top: 10px;
 }

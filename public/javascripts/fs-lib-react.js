@@ -72,7 +72,7 @@ var flightCard = React.createClass({
 					return (<div>
 					           <div className="price">{currentOffer.totalFarePrice.formattedWholePrice}</div>
 							   <a href={detailUrl}>
-							   		<button className="select-flight"> select</button>
+							   		<button className="select-flight btn-secondary btn-action t-select-btn">Select</button>
 								</a>
 								<span className="airline">{seg.airlineName}</span>
 								<p className="flight-leg">
@@ -91,6 +91,7 @@ var flightCard = React.createClass({
 		}));
 	},
 	render: function () {
+		$('.bgImage').addClass('shown');
 		return (
 			React.DOM.div(null, this._displayFlightResults())
 			);

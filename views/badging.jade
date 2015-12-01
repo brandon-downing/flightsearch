@@ -1,32 +1,35 @@
 extends layout-badging
 
 block content
-   div.backgroundImage-home
-   section.box.search-form
+   section.box.search-form.theme-inverse-pills
     h1= title
     form#flight-search(action="/results-badging")
       div#date-container
-         label On 
-         input#datepicker(
-           name="departureDate"
-           type="text"
-           placeholder="Select date"
-         )
-      div#origin-container
-        label From
-        select(name="departureAirport" id="departureAirport")
-            option(value="") Select origin
+         label.text.calendar.departing.icon-before
+          span.label Departing 
+          input#datepicker(
+            name="departureDate"
+            type="text"
+            placeholder="mm/dd/yyyy"
+          )
+          span.icon.icon-location
+      div#origin-container.col-half
+        label.select
+          span.label Flying from
+          select(name="departureAirport" id="departureAirport")
+              option(value="") Select origin
     
   
-      div#dest-container
-        label To
-        select(name="arrivalAirport" id="arrivalAirport")
-            option(value="") Select destination
+      div#dest-container.col-half
+        label.select
+          span.label Flying to
+          select(name="arrivalAirport" id="arrivalAirport")
+              option(value="") Select destination
             
-      input(
+      button.btn-secondary.btn-action.t-select-btn(
           type="submit"
-          value="Search"
       )
+        span.btn-label Search
    
    
-    script $("#datepicker").datepicker({dateFormat: 'yy-mm-dd', minDate: new Date(), numberOfMonths:2});  
+    script $("#datepicker").datepicker({dateFormat:'yy-mm-dd', minDate:new Date(), numberOfMonths:2, dayNamesMin: ["S","M","T","W","T","F","S"], monthNames: ["Jan","Feb","Mar","Apr","Maj","Jun","Jul","Aug","Sep","Okt","Nov","Dec"]});  
