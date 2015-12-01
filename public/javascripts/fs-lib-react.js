@@ -60,7 +60,7 @@ var flightCard = React.createClass({
                 flightDistance += distance;
                 
                 
-                        if(isBadging) {
+                        if(typeof isBadging !== 'undefined' && isBadging) {
                             detailspage = 'details-badging';
                         }
 
@@ -85,7 +85,8 @@ var flightCard = React.createClass({
 							</div>);
 				}),
 				
-			React.DOM.div({className: 'badge', 'data-distance': flightDistance, 'data-stops': stops, 'data-seats': seats, 'data-flightid': flight.legId},'')
+			React.DOM.div({className: 'badge', 'data-distance': flightDistance, 'data-stops': stops, 'data-seats': seats, 'data-flightid': flight.legId,
+                          'data-price': currentOffer.totalFarePrice.amount, 'data-time': flightDepartureTime},'')
 				));
 		}));
 	},
@@ -159,18 +160,93 @@ var flightDetail = React.createClass({
 
 
 var applyBadges = function(){
-	var cheapestMorning, cheapestAfternoon, cheapestNonStop, cheapestOneStop, mostSeatsRemaining;
+	var badgePrice, badgePriceRedEye, badgePriceMorning, badgePriceAfternoon, badgePriceEvening, badgePriceNonStop, badgePriceOneStop, badgeSeats, cheapestRedEye, cheapestMorning, cheapestAfternoon, cheapestEvening, cheapestNonStop, cheapestOneStop, mostSeatsRemaining;
 	var $badges = $('.badge'); 
 	$badges.each(function(index, item){
-		console.log($(item).attr('data-distance'));
-		console.log($(item).attr('data-stops'));
-		console.log($(item).attr('data-seats'));
-		console.log($(item).attr('data-flightid'));
+        var time = new Date($(item).attr('data-time')),
+            stops = parseInt($(item).attr('data-stops')),
+            seats = parseInt($(item).attr('data-seats')),
+            distance = parseInt($(item).attr('data-distance')),
+            price = parseFloat($(item).attr('data-price'));
+
+        var timeRedEye = new Date(time);
+            timeRedEye.setHours(4);
+            timeRedEye.setMinutes(59);
+        var timeMorning = new Date(time);
+            timeMorning.setHours(11);
+            timeMorning.setMinutes(59);
+        var timeAfternoon = new Date(time);
+            timeAfternoon.setHours(17);
+            timeAfternoon.setMinutes(59);
+        var timeEvening = new Date(time);
+            timeEvening.setHours(23);
+            timeEvening.setMinutes(59);
+
+       //determine cheapest redeye flight
+        if (time.getTime() <= timeRedEye.getTime()) {
+            if(badgePriceRedEye === undefined || badgePriceRedEye >= price) {
+              cheapestRedEye = $(item).attr('data-flightid');
+                badgePriceRedEye = price;
+            }
+       }
+
+        //determine cheapest morning flight
+        if (time.getTime() <= timeMorning.getTime() && time.getTime() > timeRedEye.getTime()) {
+            if(badgePriceMorning === undefined || badgePriceMorning >= price) {
+              cheapestMorning = $(item).attr('data-flightid');
+                badgePriceMorning = price;
+            }
+       }
+
+        //determine cheapest afternoon flight
+        if (time.getTime() <= timeAfternoon.getTime() && time.getTime() > timeMorning.getTime()) {
+            if(badgePriceAfternoon === undefined || badgePriceAfternoon >= price) {
+              cheapestAfternoon = $(item).attr('data-flightid');
+                badgePriceAfternoon = price;
+            }
+       }
+
+        //determine cheapest evening flight
+        if (time.getTime() <= timeEvening.getTime() && time.getTime() > timeAfternoon.getTime()) {
+            if(badgePriceEvening === undefined || badgePriceEvening >= price) {
+              cheapestEvening = $(item).attr('data-flightid');
+                badgePriceEvening = price;
+            }
+       }
+
+        //determine cheapest non-stop flight
+        if(stops === 0) {
+            if(badgePriceNonStop === undefined || price <= badgePriceNonStop){
+                badgePriceNonStop = price;
+                cheapestNonStop = $(item).attr('data-flightid');
+            }
+        }
+
+        //determine cheapest one-stop flight
+        if(stops === 1) {
+            if(badgePriceOneStop === undefined || price <= badgePriceOneStop){
+                badgePriceOneStop = price;
+                cheapestOneStop = $(item).attr('data-flightid');
+            }
+        }
+
+        //determine the flight with most seats
+        if (badgeSeats === undefined || seats > badgeSeats) {
+            badgeSeats = seats;
+            mostSeatsRemaining = $(item).attr('data-flightid');
+        }
 	});
-};
 
+    //attach classes for badging
+    $('.badge[data-flightid="'+ cheapestRedEye +'"]').addClass('cheapest-redeye');
+    $('.badge[data-flightid="'+ cheapestMorning +'"]').addClass('cheapest-morning');
+    $('.badge[data-flightid="'+ cheapestAfternoon +'"]').addClass('cheapest-afternoon');
+    $('.badge[data-flightid="'+ cheapestEvening +'"]').addClass('cheapest-evening');
+    $('.badge[data-flightid="'+ cheapestNonStop +'"]').addClass('cheapest-nonstop');
+    $('.badge[data-flightid="'+ cheapestOneStop +'"]').addClass('cheapest-onestop');
+    $('.badge[data-flightid="'+ mostSeatsRemaining +'"]').addClass('most-seats');
 
-
+};// end applyBadges
 
 var isResults = $('#flightResults').length > 0, 
 	isDetails = $('#flightDetails').length > 0;
