@@ -34,8 +34,9 @@ var flightCard = React.createClass({
 		return (_sortedData.legs.map( function (flight, flightid) {
             var currentOffer = _sortedData.offers[flightid], 
 			
-                flightDepartureTime = flight.segments[0].departureTime,
-                //flightDuration, 
+                flightDepartureTime = new Date(flight.segments[0].departureTime).getTime(),
+                flightArrivaltime = new Date(flight.segments[flight.segments.length - 1].arrivalTime).getTime(),
+                flightDuration = flightArrivaltime - flightDepartureTime,
                 stops = flight.segments.length-1, 
                 flightDistance = 0, 
                 seats = currentOffer.seatsRemaining,
@@ -86,7 +87,7 @@ var flightCard = React.createClass({
 				}),
 
                 React.DOM.div({className: 'badges', 'data-distance': flightDistance, 'data-stops': stops, 'data-seats': seats, 'data-flightid': flight.legId,
-                          'data-price': currentOffer.totalFarePrice.amount, 'data-time': flightDepartureTime},'')
+                          'data-price': currentOffer.totalFarePrice.amount, 'data-time': flightDepartureTime, 'data-duration': flightDuration},'')
 				));
 		}));
 	},
@@ -162,7 +163,7 @@ var flightDetail = React.createClass({
 
 var applyBadges = function(){
 
-	var lowestPrice, badgePriceRedEye, badgePriceMorning, badgePriceAfternoon, badgePriceEvening, badgePriceNonStop, badgePriceOneStop, badgeSeats, cheapestRedEye, cheapestMorning, cheapestAfternoon, cheapestEvening, cheapestNonStop, cheapestOneStop, mostSeatsRemaining, badgeLowestTrendedPrice;
+	var lowestPrice, badgePriceRedEye, badgePriceMorning, badgePriceAfternoon, badgePriceEvening, badgePriceNonStop, badgePriceOneStop, badgeSeats, cheapestRedEye, cheapestMorning, cheapestAfternoon, cheapestEvening, cheapestNonStop, cheapestOneStop, mostSeatsRemaining, badgeLowestTrendedPrice, shortestFlight, shortestFlightBadge;
 
     var $badges = $('.badges');
 
@@ -171,7 +172,8 @@ var applyBadges = function(){
             stops = parseInt($(item).attr('data-stops')),
             seats = parseInt($(item).attr('data-seats')),
             distance = parseInt($(item).attr('data-distance')),
-            price = parseFloat($(item).attr('data-price'));
+            price = parseFloat($(item).attr('data-price')),
+            duration = parseInt($(item).attr('data-duration'));
 
         var timeRedEye = new Date(time);
             timeRedEye.setHours(4);
@@ -186,14 +188,21 @@ var applyBadges = function(){
             timeEvening.setHours(23);
             timeEvening.setMinutes(59);
 
-       //determine cheapest redeye flight
-    if(lowestPrice === undefined || price < lowestPrice) {
-        lowestPrice = parseFloat(price);
-    }
+
+        //lowest price
+        if(lowestPrice === undefined || price < lowestPrice) {
+            lowestPrice = parseFloat(price);
+        }
+
+        //shortest flight
+        if(shortestFlight === undefined || duration < shortestFlight) {
+            shortestFlight = parseFloat(duration);
+            shortestFlightBadge = $(item).attr('data-flightid');
+
+        }
 
 
-
-
+        //determine cheapest redeye flight
         if (time.getTime() <= timeRedEye.getTime()) {
             if(badgePriceRedEye === undefined || badgePriceRedEye >= price) {
               cheapestRedEye = $(item).attr('data-flightid');
@@ -262,6 +271,10 @@ var applyBadges = function(){
     if(findTrends){
         $('.badges:eq(0)').append('<span class="best-trended">One of the cheapest this week!</span>');
     }
+
+    $('.badges[data-flightid="'+ shortestFlightBadge +'"]').append('<span class="shortest-flight">This is the shortest flight!</span>');
+
+
 
 };// end applyBadges
 
